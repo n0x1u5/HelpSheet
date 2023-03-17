@@ -249,6 +249,20 @@ wpscan --url [URL] --usernames admin --passwords rockyou.txt --max-threads 5 -->
 wpscan --url [URL] -e vp --> Enumerar plugins vulnerables en el sitio web
 
 
+NIKTO
+.....
+
+nikto -h scanme.nmap.org
+nikto -h https://nmap.org -ssl
+
+
+CURL
+.....
+
+https://www.keycdn.com/support/popular-curl-examples
+
+
+
 WINDOWS TRICKS
 ...............
 
