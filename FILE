@@ -214,7 +214,6 @@ hydra -L user.txt -P /usr/share/wordlists/rockyou.txt [IP] http-post-form "[URL]
    Ejemplo: hydra -L /home/kali/Downloads/users.txt -P /usr/share/wordlists/rockyou.txt 'http-get-form://10.10.134.16/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie\:PHPSESSID=050toadub7n33f96ehi7jo83o1; security=low; security=low:F=Username and/or password incorrect' 
 
 
-
 SMB
 ....
 
@@ -308,13 +307,6 @@ nikto -h scanme.nmap.org
 nikto -h https://nmap.org -ssl
 
 
-CURL
-.....
-
-https://www.keycdn.com/support/popular-curl-examples
-
-
-
 WINDOWS TRICKS
 ...............
 
@@ -402,6 +394,7 @@ DNS
    dig axfr [dominio]
    nslookup
 whatweb [URL]
+curl --> https://www.keycdn.com/support/popular-curl-examples
 
 AUTORECON TOOL
 ...............
@@ -417,3 +410,59 @@ python3 -m pipx ensurepath
 [open terminal]
 pipx install git+https://github.com/Tib3rius/AutoRecon.git
 sudo env "PATH=$PATH" autorecon [IP]
+
+PIVOTING
+.........
+SSH Local Port Forwarding:
+     ssh -L [bindaddr]:[port]:[dsthost]:[dstport] [user]@[host]
+     ssh -L source_port:forward_to_host:destination_port via_host
+
+SSH Remote Port Forwarding:
+     ssh -R sourcePort:HostToForwardTrafficTo:onPort connectToHost
+     ssh -R PORT:IP:port root@ip
+
+Windows Netsh:
+     netsh interface portproxy add v4tov4 listenaddress=localaddress listenport=localport connectaddress=destaddress connectport=destport
+
+Metasploit
+     portfwd add –l 3389 –p 3389 –r target-host
+
+Socat
+     https://github.com/3ndG4me/socat
+     socat TCP4-LISTEN:81 TCP4:IP:PORT
+     socat TCP4-LISTEN:81,fork,reuseaddr TCP4:TCP4:IP
+
+Proxychains (Configurar primero Proxychains socks4 o socks5)
+     /etc/proxychains.conf
+     [ProxyList]
+     socks4 localhost 8080
+     socks5 localhost 1080
+
+Chisel
+     https://github.com/jpillora/chisel
+     Server: chisel server -p 443 -reverse -v --socks5
+     Client: chisel client <server_ip>:443 R:socks
+
+Sshuttle:
+     https://github.com/sshuttle/sshuttle
+     sshuttle -r username@sshserver IP -vv
+     DNS: sshuttle --dns -vvr username@sshserver 0/0
+
+SharpSocks:
+     https://github.com/nettitude/SharpSocks
+
+Pivotnacci:
+     https://github.com/blackarrowsec/pivotnacci
+     pivotnacci https[:]//domain[.]com/agent  --password "s3cr3t"
+     pivotnacci https[:]//domain[.]com/agent  --polling-interval 2000
+
+Metasploit
+     run autoroute -s subnet /24
+     route add subnet subnet_mask session_id 
+     use auxiliary/server/socks_proxy
+
+Para utilizar los túneles y pasar a traves de internet, podemos usar VPS o herramientas como Ngrok.
+https://lnkd.in/dBqFskwM
+./ngrok http 4433
+./ngrok tcp 4433
+
