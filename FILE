@@ -197,7 +197,7 @@ CRACKING PASSWORDS/LOGIN WEB
 https://hashes.com/en/decrypt/hash
 https://hashcat.net/wiki/doku.php?id=example_hashes
 
-john -wordlist /path/to/wordlist -format=[FORMATO] -users=users.txt hashfile
+sudo john --format=[format] --wordlist=[path to wordlist] [path to file]
 
 hydra -L users.txt -P pass.txt -t 10 <IP address> ssh -s 22
 
@@ -390,6 +390,7 @@ DNS
    nslookup
 whatweb [URL]
 curl --> https://www.keycdn.com/support/popular-curl-examples
+
 
 AUTORECON TOOL
 ...............
