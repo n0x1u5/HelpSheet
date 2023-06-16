@@ -80,6 +80,8 @@ nmap --script http-enum -p [PUERTO] [IP]
 
 gobuster dir --url http://IP --wordlist /usr/share/wordlists/dirb/big.txt
 
+dirb http://IP /path/to/wordlist
+
 dirsearch -u http://[IP]/ -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 150 -e php,txt,html -f
 
 Si para acceder al sitio web salta un cuadro emergente pidiendo credenciales y las conocemos, para fuzzear esa parte a la que accedemos despues del login:
