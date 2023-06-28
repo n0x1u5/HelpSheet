@@ -55,10 +55,9 @@ TRATAMIENTO TTY
 ...............
 
 LINUX
-   script /dev/null -c bash
+   script /dev/null -c bash // python -c "import pty;pty.spawn('/bin/bash')"
    ctrl+z
-   stty raw-echo
-   fg
+   stty raw-echo;fg
    reset
    xterm
    export TERM=xterm
