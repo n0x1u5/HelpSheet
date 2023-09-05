@@ -200,6 +200,10 @@ https://hashcat.net/wiki/doku.php?id=example_hashes
 
 sudo john --format=[format] --wordlist=[path to wordlist] [path to file]
 
+Si queremos juntar /etc/passwd y /etc/shadow para lueo crackear...
+     unshadow passwd.txt shadow.txt > unshadow.txt
+     john unshadow.txt --wordlist=/usr/share/wordlists/rockyou.txt
+
 hydra -L users.txt -P pass.txt -t 10 <IP address> ssh -s 22
 
 hashcat -m 0 hash.txt /usr/share/wordlists/rockyou.txt
@@ -207,7 +211,7 @@ hashcat -m 0 hash.txt /usr/share/wordlists/rockyou.txt
 Replace "ssh" with any service name
 
 hydra -L user.txt -P /usr/share/wordlists/rockyou.txt [IP] http-post-form "[URL]:[TOKEN-URL]:Login failed"
-   Ejemplo: hydra -L /home/kali/Downloads/users.txt -P /usr/share/wordlists/rockyou.txt 'http-get-form://10.10.134.16/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie\:PHPSESSID=050toadub7n33f96ehi7jo83o1; security=low; security=low:F=Username and/or password incorrect' 
+     Ejemplo: hydra -L /home/kali/Downloads/users.txt -P /usr/share/wordlists/rockyou.txt 'http-get-form://10.10.134.16/vulnerabilities/brute/:username=^USER^&password=^PASS^&Login=Login:H=Cookie\:PHPSESSID=050toadub7n33f96ehi7jo83o1; security=low; security=low:F=Username and/or password incorrect' 
 
 
 SMB
@@ -300,7 +304,8 @@ NIKTO
 .....
 
 nikto -h scanme.nmap.org
-nikto -h https://nmap.org -ssl
+nikto -h https://nmap.org -ssl --> Si la web va por HTTPS
+nikto -h $TARGET -T 9 -Format txt -o scans/$TARGET-nikto-80-sqli --> Escanea en busca de vulnerabilidades SQLi
 
 
 WINDOWS TRICKS
