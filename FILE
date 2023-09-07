@@ -229,6 +229,17 @@ smbclient -L IP -N
 
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse [IP]
 
+RPC, NetBios
+.............
+
+rpcinfo -p $TARGET
+nbtscan $TARGET
+rpcclient -U "" $TARGET
+
+SMTP
+.....
+
+smtp-user-enum -U /usr/share/wordlists/names.txt -t $TARGET -m 150
 
 NFS
 ....
@@ -247,6 +258,23 @@ shred -zun 5 -v
 
 https://hackingpassion.com/clear-your-tracks-on-linux/
 https://null-byte.wonderhowto.com/how-to/clear-logs-bash-history-hacked-linux-systems-cover-your-tracks-remain-undetected-0244768/
+
+
+COMPILAR PROGRAMAS C
+.....................
+
+Windows
+     i686-w64-mingw32-gcc source.c -lws2_32 -o out.exe
+
+Linux
+     gcc program.c –o executable.exe
+
+
+FIND WINDOWS UNQUOTED SERVICE PATHS
+....................................
+
+wmic service get name,displayname,pathname,startmode |findstr /i "auto" |findstr /i /v "c:\windows\\" |findstr /i /v """
+wmic service get name,displayname,pathname,startmode | findstr /i /v "C:\Windows\\" |findstr /i /v """
 
 
 ESCAPAR COMANDOS
@@ -388,6 +416,7 @@ DefaultPassword
 RouterPassword
 Pastebin
 RainbowCrack
+
 
 ENUMERACION WEB
 ................
