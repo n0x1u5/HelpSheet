@@ -228,6 +228,7 @@ smbclient -L IP -N
 
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse [IP]
 
+
 RPC, NetBios
 .............
 
@@ -235,10 +236,12 @@ rpcinfo -p $TARGET
 nbtscan $TARGET
 rpcclient -U "" $TARGET
 
+
 SMTP
 .....
 
 smtp-user-enum -U /usr/share/wordlists/names.txt -t $TARGET -m 150
+
 
 NFS
 ....
