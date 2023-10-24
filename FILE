@@ -82,7 +82,7 @@ wfuzz -c -t 400 --hc=404 -w [wordlist] [url]/FUZZ
 wfuzz -c -t 400 --hc=404 -w [wordlist] -w [archivo_extensiones] [url]/FUZZ.FUZ2Z
 wfuzz -c -t 400 --hc=404 -z range,0-100 http://IP/note.php?note=FUZZ --> probar numeros del 0 al 100
 
-nmap --script http-enum -p [PUERTO] [IP]
+nmap -p [PUERTO] --script http-enum [IP]
 
 gobuster dir --url http://IP --wordlist /usr/share/wordlists/dirb/big.txt
 
@@ -150,7 +150,8 @@ sudo nmap -A -T4 -p- -sS -sV -oN initial --script discovery <RHOST>
 sudo nmap -sC -sV -p- --scan-delay 5s <RHOST>
 sudo nmap $TARGET -p 88 --script krb5-enum-users --script-args krb5-enum-users.realm='test' <RHOST>
 ls -lh /usr/share/nmap/scripts/*ssh*
-locate -r '\.nse$' | xargs grep categories | grep categories | grep 'default\|version\|safe' | grep smb
+locate .nse | xargs grep "categories" | grep -oP '".*?"' | sort -u --> mostrar todas las categorias de scripts nse que tiene nmap
+          ej: nmap -p[PUERTO] [IP] --script="categoria"
 
      https://nmap.org/man/es/index.html
 
@@ -352,13 +353,15 @@ NFS
     sudo mount -t nfs IP:/recurso unacarpetanuestra
 
 
-BORRAR RASTRO RAPIDAMENTE EN MAQUINAS LINUX
-............................................
+LINUX TRICKS
+.............
 
-shred -zun 5 -v
+lsof -i:80 --> ver que servicio/proceso está ocupando el puerto 80
+pwdx [pid] --> ver en que ruta tiene origen ese proceso/servicio
 
-https://hackingpassion.com/clear-your-tracks-on-linux/
-https://null-byte.wonderhowto.com/how-to/clear-logs-bash-history-hacked-linux-systems-cover-your-tracks-remain-undetected-0244768/
+shred -zun 5 -v --> borrar rastro, logs....
+     https://hackingpassion.com/clear-your-tracks-on-linux/
+     https://null-byte.wonderhowto.com/how-to/clear-logs-bash-history-hacked-linux-systems-cover-your-tracks-remain-undetected-0244768/
 
 
 COMPILAR PROGRAMAS C
