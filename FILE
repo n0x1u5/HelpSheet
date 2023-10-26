@@ -81,6 +81,7 @@ DESCUBRIMIENTO DE HOSTS
 arp-scan -I [interfaz] [rango IP] --ignoredumps --> más recomendado!
 netdiscover -r [rango IP]
 hostdiscover.sh
+masscan --> https://www.kali.org/tools/masscan/
 
 
 FUZZING WEB
