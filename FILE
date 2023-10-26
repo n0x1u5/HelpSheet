@@ -75,6 +75,14 @@ WINDOWS
    https://github.com/antonioCoco/ConPtyShell
 
 
+DESCUBRIMIENTO DE HOSTS
+........................
+
+arp-scan -I [interfaz] [rango IP] --ignoredumps --> más recomendado!
+netdiscover -r [rango IP]
+hostdiscover.sh
+
+
 FUZZING WEB
 ...........
 
