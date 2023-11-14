@@ -15,7 +15,7 @@ H A C K I N G   H Y P E:
 ⠀⠀⣨⣷⣶⣿⣧⣛⣛⠿⠿⣿⢿⣿⣿⣛⣿⡿⠀⠀⡇⠀⠀⠀⠀⢸⠀⠈⢿⣟⣛⠿⢿⡿⢿⢿⢿⣛⣫⣼⡿⣶⣾⣅⡀⠀
 ⢀⡼⠋⠁⠀⠀⠈⠉⠛⠛⠻⠟⠸⠛⠋⠉⠁⠀⠀⢸⡇⠀⠀⠄⠀⢸⡄⠀⠀⠈⠉⠙⠛⠃⠻⠛⠛⠛⠉⠁⠀⠀⠈⠙⢧⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⡇⢠⠀⠀⠀⢸⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀W E L C O M E⠀⠀⠀⠀⢀⣾⣿⡇⠀⠀⠀⠀⢸⣿⣷⡀⠀⠀⠀⠀W E L C O M E⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀W E L C O M E⠀⠀⠀⠀⢀⣾⣿⡇⠀⠀⠀⠀⢸⣿⣷⡀⠀⠀⠀⠀  H A C K E R⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠟⠁⣿⠇⠀⠀⠀⠀⢸⡇⠙⢿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠰⣄⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⠖⡾⠁⠀⠀⣿⠀⠀⠀⠀⠀⠘⣿⠀⠀⠙⡇⢸⣷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠄⠀
 ⠀⠀⢻⣷⡦⣤⣤⣤⡴⠶⠿⠛⠉⠁⠀⢳⠀⢠⡀⢿⣀⠀⠀⠀⠀⣠⡟⢀⣀⢠⠇⠀⠈⠙⠛⠷⠶⢦⣤⣤⣤⢴⣾⡏⠀⠀
@@ -196,14 +196,6 @@ COMMON PORTS
 69 - TFTP
 88 - Kerberos
 102 - MS Exchange
-
-
-HOW TO SET ROUTE
-.................
-
-ip route add <Network To Which We Need Access> via <GATEWAY>
-    ejemplo:
-        ip route add 192.168.1.0/24 via 10.10.15.1
 
 
 BANNER GRABING
@@ -410,6 +402,13 @@ sudo service postgresql start
 sudo msfconsole
 
 
+DOCKER
+.......
+
+docker ps -a --> listar todos los contenedores que están en ejecución en el sistema
+docker exec -it 123456789 bash --> ejecutar el comando “bash” en el contenedor con el identificador “123456789“ se abrirá una shell
+
+
 TRATAMIENTO DE IMAGENES
 ........................
 
@@ -575,6 +574,12 @@ sudo env "PATH=$PATH" autorecon [IP]
 
 PIVOTING
 .........
+
+How to set route
+     ip route add <Network To Which We Need Access> via <GATEWAY>
+         ejemplo:
+             ip route add 192.168.1.0/24 via 10.10.15.1
+
 SSH Local Port Forwarding:
      ssh -L [bindaddr]:[port]:[dsthost]:[dstport] [user]@[host]
      ssh -L source_port:forward_to_host:destination_port via_host
