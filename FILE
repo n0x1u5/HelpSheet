@@ -457,6 +457,13 @@ droopescan scan drupal -u [URL]
 https://github.com/SamJoan/droopescan
 
 
+MAGENTO
+........
+
+magescan.phar scan:all [URL]
+https://github.com/steverobbins/magescan
+
+
 NIKTO
 .....
 
