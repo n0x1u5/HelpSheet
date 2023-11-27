@@ -336,6 +336,7 @@ smbclient -L IP -N
         smbget -R smb://IP/recurso
 
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse [IP]
+smbmap -H [IP]
 
 
 RPC, NetBios
@@ -432,13 +433,28 @@ Hacking_Help_Sheet_Resume1.png
 Hacking_Help_Sheet_Resume2.png
 
 
-WPSCAN
-.......
+WORDPRESS
+..........
 
 wpscan --url [URL] -e u
 wpscan --url [URL]
 wpscan --url [URL] --usernames admin --passwords rockyou.txt --max-threads 5 --> Fuerza bruta panel login wordpress
+     Otra forma... https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions/
 wpscan --url [URL] -e vp --> Enumerar plugins vulnerables en el sitio web
+
+
+JOOMLA
+.......
+
+joomscan -u [URL]
+https://github.com/OWASP/joomscan
+
+
+DRUPAL
+.......
+
+droopescan scan drupal -u [URL]
+https://github.com/SamJoan/droopescan
 
 
 NIKTO
@@ -562,6 +578,7 @@ DNS
    nslookup
 whatweb [URL]
 curl --> https://www.keycdn.com/support/popular-curl-examples
+sslscan [dominio]
 
 
 AUTORECON TOOL
