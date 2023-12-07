@@ -564,6 +564,8 @@ ENUM PRIVESC
           pwd
           env
           getcap -r / 2>/dev/null
+          systemctl list-timers
+          pspy
           *Si tras ganar acceso a una shell en la maquina objetivo, somos un usuario con pocos privilegios pero tenemos acceso a /var/www/html podemos buscar mediante el siguiente comando find archivos de configuracion que contengan contraseñas o datos sensibles, para empezar a ganar privilegios: find . -iname '*config*' -type f -exec grep -nie 'pass.*=' --color=always /dev/null {} \;
 
      Windows
