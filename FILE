@@ -322,7 +322,9 @@ https://hashcat.net/wiki/doku.php?id=example_hashes
 
 sudo john --format=[format] --wordlist=[path to wordlist] [path to file]
 
-Si queremos juntar /etc/passwd y /etc/shadow para lueo crackear...
+john --list=formats ver cifrados que admite john
+
+Si queremos juntar /etc/passwd y /etc/shadow para luego crackear...
      unshadow passwd.txt shadow.txt > unshadow.txt
      john unshadow.txt --wordlist=/usr/share/wordlists/rockyou.txt
 
