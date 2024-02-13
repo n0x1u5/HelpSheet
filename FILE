@@ -353,6 +353,10 @@ smbclient -L IP -N
 
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse [IP]
 smbmap -H [IP]
+smbmap -H [IP] -u [user] -p [password] -- probar usuario y una única contraseña para ver recursos compartidos
+crackmapexec smb [IP] -u '' -p '' --user --> enumerar usuarios 
+crackmapexec smb [IP] -u [user] -p [passwords] -- probar usarios y contraseñas
+smbmap 
 
 
 RPC, NetBios
