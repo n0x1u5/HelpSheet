@@ -563,6 +563,7 @@ ENUM PRIVESC
           sudo -l
           whoami
           uname -a
+          ls -la
           ss -tulwn
           cat /etc/crontab
           cat /etc/passwd
