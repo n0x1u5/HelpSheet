@@ -457,6 +457,17 @@ sudo service postgresql start
 sudo msfconsole
 
 
+FIND FLAGS 
+...........
+
+Linux 
+     find / -type f -name "*.txt"
+     find / -type f -name "user.txt"
+     find / -type f -name "root.txt"
+
+Windows --> 
+     
+
 DOCKER
 .......
 
