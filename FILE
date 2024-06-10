@@ -117,6 +117,7 @@ nmap -p [PUERTO] --script http-enum [IP]
 
 gobuster dir --url http://IP --wordlist /usr/share/wordlists/dirb/big.txt
 gbuster vhost -u http://IP/ -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-20000.txt -t 20 --> escaneo de subdominios
+gobuster -x: fuzzing por extensiones
 
 ffuf -w /usr/share/wordlists/seclists/Fuzzing/LFI/LFI-Jhaddix.txt -u http://<RHOST>/admin../admin_staging/index.php?page=FUZZ -fs 15349 --> Searching for LFI
 ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d "username=FUZZ&email=x&password=x&cpassword=x" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/signup -mr "username already exists" --> Username enumeration with ffuf
