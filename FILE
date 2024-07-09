@@ -631,6 +631,7 @@ ENUM PRIVESC
           cmdkey /list
           icacls
           schtasks /query
+          schtasks /query /fo LIST /v
           dir
           sc
           set
