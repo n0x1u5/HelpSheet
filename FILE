@@ -249,10 +249,15 @@ COMMON PORTS
 5986 - winRM HTTPS
 
 
-BANNER GRABING
-...............
+DATA EXFILTRATION
+..................
 
-nc -nv  <IP> <port>
+     - Linux
+
+          https://www.hackingarticles.in/data-exfiltration-using-linux-binaries/
+          nc -nv  <IP> <port>
+
+     - Windows
 
 
 SSRF
