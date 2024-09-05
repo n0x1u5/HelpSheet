@@ -246,6 +246,7 @@ COMMON PORTS
 88 - Kerberos
 102 - MS Exchange
 53 - DNS
+5355 - LLMNR
 5985 - winRM HTTP
 5986 - winRM HTTPS
 
