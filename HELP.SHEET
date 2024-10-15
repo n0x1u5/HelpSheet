@@ -424,15 +424,20 @@ NFS
     sudo mount -t nfs IP:/recurso unacarpetanuestra
 
 
-LINUX TRICKS
-.............
+LINUX/WINDOWS TRICKS
+.....................
 
 lsof -i:80 --> ver que servicio/proceso está ocupando el puerto 80
 pwdx [pid] --> ver en que ruta tiene origen ese proceso/servicio
 
-shred -zun 5 -v --> borrar rastro, logs....
+shred -zun 5 -v --> borrar rastro, logs... en linux
+
      https://hackingpassion.com/clear-your-tracks-on-linux/
      https://null-byte.wonderhowto.com/how-to/clear-logs-bash-history-hacked-linux-systems-cover-your-tracks-remain-undetected-0244768/
+
+wevtutil cl System && wevtutil cl Security --> borrar los logs de eventos en Windows
+sudo useradd -m -r -s /bin/bash backdoor_user --> crear usuario oculto en Linux
+dir /a:h-d /b/s --> mostrar archivos ocultos en windows
 
 
 COMPILAR PROGRAMAS C
@@ -480,7 +485,9 @@ Linux
      find / -type f -name "user.txt"
      find / -type f -name "root.txt"
 
-Windows --> 
+Windows -->
+     dir C:\ /s /b | find "user.txt"
+     dir C:\ /s /b | find "user.txt"
      
 
 DOCKER
