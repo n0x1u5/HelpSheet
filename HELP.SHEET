@@ -104,6 +104,7 @@ DESCUBRIMIENTO DE HOSTS
 arp-scan -I [interfaz] [rango IP] -g --> más recomendado!
 netdiscover -r [rango IP]
 hostdiscover.sh
+nmap -sn [rango IP]
 masscan --> https://www.kali.org/tools/masscan/
 
 
@@ -398,7 +399,17 @@ smbmap -H [IP]
 smbmap -H [IP] -u [user] -p [password] -- probar usuario y una única contraseña para ver recursos compartidos
 crackmapexec smb [IP] -u '' -p '' --user --> enumerar usuarios 
 crackmapexec smb [IP] -u [user] -p [passwords] -- probar usarios y contraseñas
-smbmap 
+smbmap
+
+
+MySQL
+......
+
+default credentials connect
+     mysql -u [user] -p -h [IP]
+     [INTRO] 
+connect
+     mysql -u [user] -p [pass] -h [IP]
 
 
 RPC, NetBios
