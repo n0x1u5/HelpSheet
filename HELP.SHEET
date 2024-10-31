@@ -182,9 +182,9 @@ Decode --> echo aG9sYXNveXBlcGU= | base64 -d; echo
 NMAP
 ....
 
-sudo nmap -A -T4 -sC -sV -p- <RHOST>
-sudo nmap -sV -sU <RHOST>
-sudo nmap -A -T4 -sC -sV --script vuln <RHOST>
+sudo nmap -vv -sC -sV -p- <RHOST>
+sudo nmap -sV -sU <RHOST> -- escaneo UDP
+sudo nmap -T4 -sC -sV --script vuln <RHOST> -- buscar vulns
 sudo nmap -A -T4 -p- -sS -sV -oN initial --script discovery <RHOST>
 sudo nmap -sC -sV -p- --scan-delay 5s <RHOST>
 sudo nmap $TARGET -p 88 --script krb5-enum-users --script-args krb5-enum-users.realm='test' <RHOST>
