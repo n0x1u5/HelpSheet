@@ -351,6 +351,8 @@ CRACKING PASSWORDS/LOGIN WEB
 https://hashes.com/en/decrypt/hash
 https://hashcat.net/wiki/doku.php?id=example_hashes
 
+Borrar logs john --> rm ~/.john/john.*
+
 sudo john --format=[format] --wordlist=[path to wordlist] [path to file]
 
 john --list=formats ver cifrados que admite john
