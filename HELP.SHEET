@@ -675,6 +675,10 @@ DNS
    nslookup
 whatweb [URL]
 curl --> https://www.keycdn.com/support/popular-curl-examples, https://osint.com.ar/domina-curl-con-esta-guia-esencial-de-comandos/
+      curl ascii.live/rick
+      curl ascii.live/parrot
+      curl ascii.live/forrest
+      curl ascii.live/batman
 sslscan [dominio]
 
 
