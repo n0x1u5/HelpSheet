@@ -674,7 +674,7 @@ DNS
    dig axfr [dominio]
    nslookup
 whatweb [URL]
-curl --> https://www.keycdn.com/support/popular-curl-examples
+curl --> https://www.keycdn.com/support/popular-curl-examples, https://osint.com.ar/domina-curl-con-esta-guia-esencial-de-comandos/
 sslscan [dominio]
 
 
