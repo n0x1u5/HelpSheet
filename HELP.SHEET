@@ -376,6 +376,9 @@ hydra -L user.txt -P /usr/share/wordlists/rockyou.txt [IP] http-post-form "[URL]
 python brut3k1t.py -s smtp -a smtp.gmail.com -u test@gmail.com -w word list.txt -p 25 -d 3 --> Cracking email test@gmail.com con wordlist.txt en el puerto 25 con un retraso de 3 segundos. 
      more... https://noticiasseguridad.com/hacking-incidentes/realiza-ataques-de-fuerza-bruta-ssh-smtp-facebook-e-instagram-brut3k1t/
 
+RSAcrack -w /opt/techyou.txt -k id_rsa ---> crackear passphrase de archivo id_rsa
+
+
 SMB
 ....
 
@@ -429,6 +432,7 @@ NFS
 
 *Para conectarse al recurso:
     sudo mount -t nfs IP:/recurso unacarpetanuestra
+
 
 
 LINUX/WINDOWS TRICKS
