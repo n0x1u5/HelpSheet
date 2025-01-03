@@ -680,6 +680,7 @@ DNS
    nslookup
 whatweb [URL]
 curl --> https://www.keycdn.com/support/popular-curl-examples, https://osint.com.ar/domina-curl-con-esta-guia-esencial-de-comandos/
+curl -IL https://www.inlanefreight.com --> banner grabbing web
       curl ascii.live/rick
       curl ascii.live/parrot
       curl ascii.live/forrest
