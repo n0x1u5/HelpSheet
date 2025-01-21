@@ -90,6 +90,14 @@ WINDOWS
    https://github.com/antonioCoco/ConPtyShell
 
 
+KALI TOOLS
+...........
+
+Instalar todas la herramientas de Kali Linux
+
+sudo apt update
+sudo apt install kali-tools-*
+
 DESCUBRIMIENTO DE HOSTS
 ........................
 
