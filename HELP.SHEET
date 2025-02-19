@@ -694,6 +694,7 @@ curl -IL https://www.inlanefreight.com --> banner grabbing web
       curl ascii.live/forrest
       curl ascii.live/batman
 sslscan [dominio]
+openssl s_client -connect [dominio]:443 --> ver certificados SSL
 
 
 AUTORECON TOOL
