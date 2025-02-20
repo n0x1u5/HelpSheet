@@ -592,8 +592,17 @@ https://jmlgomez73.github.io/log4shell/
 https://github.com/fullhunt/log4j-scan
 
 
-ACTIVE DIRECTORY
-................
+**ACTIVE DIRECTORY**
+**................**
+
+ENUM
+  crackmapexec smb [rango_IP] --> realizar peticiones smb para descubrir equipos del dominio
+  crackmapexec smb [rango_IP] -u '' -p '' --shares --> intentar enumerar carpetas compartidas en los equipos con un user anonimo
+  crackmapexec smb [rango_IP] -u 'user' -p 'password' --shares --> enumerar carpetas compartidas en los equipos con un user autenticado
+  crackmapexec smb [IP_DC] -u 'user' -p 'password' --groups --> enumerar grupos en los equipos con un user autenticado
+  crackmapexec smb [IP_DC] -u 'user' -p 'password' --users --> enumerar usuarios en los equipos con un user autenticado
+  crackmapexec smb [IP_DC] --pass-pol --> enumerar politica contraseñas del dominio
+  bloodhound-python -u user -p password -d dominio.local -c All --> sacar información del dominio para verla con bloodhound
 
 https://www.hackplayers.com/2022/03/top10-de-ataques-al-directorio-activo.html
 
