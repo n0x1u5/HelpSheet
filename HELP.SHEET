@@ -442,6 +442,15 @@ NFS
     sudo mount -t nfs IP:/recurso unacarpetanuestra
 
 
+MobSF
+......
+
+sudo apt install python3-dev python3-venv python3-pip build-essential libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg62-turbo-dev zlib1g-dev wkhtmltopdf python3-poetry git gunicorn python3-virtualenv
+pip3 install virtualenv
+virtualenv -p python3 venv
+
+ejecutar como roo
+
 
 LINUX/WINDOWS TRICKS
 .....................
