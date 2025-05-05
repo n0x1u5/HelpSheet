@@ -188,6 +188,7 @@ NMAP
 ....
 
 sudo nmap -vv -sC -sV -p- <RHOST>
+nmap -sA [IP] --> Ver si el equipo objetivo está tras un firewall/IDS
 sudo nmap -sV -sU <RHOST> -- escaneo UDP
 sudo nmap -T4 -sC -sV --script vuln <RHOST> -- buscar vulns
 sudo nmap -A -T4 -p- -sS -sV -oN initial --script discovery <RHOST>
@@ -403,6 +404,8 @@ smbclient -L IP -N
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse [IP]
 smbmap -H [IP]
 smbmap -H [IP] -u [user] -p [password] -- probar usuario y una única contraseña para ver recursos compartidos
+nmap -p445 --script smb-security-mode [IP] --> nmap script to find the smb protocol security level.
+nmap -p445 --script smb-protocols [IP] --> Identificar versiones de SMB permitidas
 crackmapexec smb [IP] -u '' -p '' --user --> enumerar usuarios 
 crackmapexec smb [IP] -u [user] -p [passwords] -- probar usarios y contraseñas
 smbshares.sh
