@@ -406,6 +406,7 @@ smbmap -H [IP]
 smbmap -H [IP] -u [user] -p [password] -- probar usuario y una única contraseña para ver recursos compartidos
 nmap -p445 --script smb-security-mode [IP] --> nmap script to find the smb protocol security level.
 nmap -p445 --script smb-protocols [IP] --> Identificar versiones de SMB permitidas
+impacket-psexec test.local/user:pass@[IP] --> obtener shell con credenciales conocidas y SMB abierto 
 crackmapexec smb [IP] -u '' -p '' --user --> enumerar usuarios 
 crackmapexec smb [IP] -u [user] -p [passwords] -- probar usarios y contraseñas
 smbshares.sh
