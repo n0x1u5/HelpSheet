@@ -621,7 +621,9 @@ rdesktop <RHOST>
 
 ncrack -vv --user user -P wordlist.txt [IP]:3389 -- Try cracking rdp login
 
-crowbar -b rdp -u user -C password_wordlist -s [IP] -v -- Other method to try cracking 
+crowbar -b rdp -u user -C password_wordlist -s [IP] -v -- Other method to try cracking
+
+auxiliary/scanner/rdp/cve_2019_0708_bluekeep --> msf module to check de vuln bluekeep 
 
 
 VULNERABILIDAD LOG4J
