@@ -413,6 +413,13 @@ crackmapexec smb [IP] -u [user] -p [passwords] -- probar usarios y contraseñas
 smbshares.sh
 
 
+RSYNC
+.....
+
+rsync rsync://IP --> conectarse por rsync
+rsync -av rsync://target1.ine.local . --> copiar todos los archivos a local
+
+
 SHELLSHOCK VULN
 ................
 
