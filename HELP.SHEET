@@ -586,6 +586,7 @@ wpscan --url [URL]
 wpscan --url [URL] --usernames admin --passwords rockyou.txt --max-threads 5 --> Fuerza bruta panel login wordpress
      Otra forma... https://nitesculucian.github.io/2019/07/01/exploiting-the-xmlrpc-php-on-all-wordpress-versions/
 wpscan --url [URL] -e vp --> Enumerar plugins vulnerables en el sitio web
+wpscan --api-token '25luAe1jlBFsfJhU3wsvPjLgT1w5s6Cqc7jdRAhEDno' --url http://blog.thm --> escanear con api token
 
 
 JOOMLA
