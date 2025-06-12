@@ -200,6 +200,11 @@ ls -lh /usr/share/nmap/scripts/*ssh*
 locate .nse | xargs grep "categories" | grep -oP '".*?"' | sort -u --> mostrar todas las categorias de scripts nse que tiene nmap
           ej: nmap -p[PUERTO] [IP] --script="categoria"
 
+nmap -vv -D 10.10.171.166 --> Enviar paquetes falsos desde multiples IP. Para lanzar un rango entero:
+            decoys=$(for i in {10..250}; do echo -n "192.168.1.$i,"; done | sed 's/,$//')
+            nmap -vv -D $decoys 10.10.171.166
+
+
      https://nmap.org/man/es/index.html
 
 
