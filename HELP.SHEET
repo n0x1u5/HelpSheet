@@ -106,7 +106,7 @@ wfuzz -c -t 400 --hc=404 -z range,0-100 http://IP/note.php?note=FUZZ --> probar 
 
 nmap -p [PUERTO] --script http-enum [IP]
 
-gobuster dir --url http://IP --wordlist /usr/share/wordlists/dirb/big.txt
+gobuster dir --url http://IP --wordlist /usr/share/wordlists/dirb/big.txt ---> escaneo basico gobuster
 gbuster vhost -u http://IP/ -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-20000.txt -t 20 --> escaneo de subdominios
 gobuster -x: fuzzing por extensiones
 gobuster dir -u http://target2.ine.local/wpcontent/plugins/ -w /usr/share/nmap/nselib/data/wp-plugins.lst --> fuzzing plugins wordpress
@@ -119,7 +119,7 @@ dirb http://IP /path/to/wordlist --> fuzzing básico
 
 dirb http://target1.ine.local -u user:password --> fuzzing a web que previmiente pide credenciales
 
-dirsearch -u http://[IP]/ -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 150 -e php,txt,html -f
+dirsearch -u http://[IP]/ -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 150 -e php,txt,html -f ---> fuzzing web para encontrar archivos con extension
 
 Si para acceder al sitio web salta un cuadro emergente pidiendo credenciales y las conocemos, para fuzzear esa parte a la que accedemos despues del login:
     dirb http://[IP]/ -u user:password
