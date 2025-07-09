@@ -204,8 +204,9 @@ nmap -vv -D 10.10.171.166 --> Enviar paquetes falsos desde multiples IP. Para la
             decoys=$(for i in {10..250}; do echo -n "192.168.1.$i,"; done | sed 's/,$//')
             nmap -vv -D $decoys 10.10.171.166
 
+cat archivo-salida-nmap | sed 's/\// /g' | awk '{print $1}' | tr "\n" ","  --> sacar únicamente el número de puerto separados por comas.
 
-     https://nmap.org/man/es/index.html
+https://nmap.org/man/es/index.html
 
 
 WEB SHELL
