@@ -419,6 +419,8 @@ nmap -p445 --script smb-protocols [IP] --> Identificar versiones de SMB permitid
 impacket-psexec test.local/user:pass@[IP] --> obtener shell con credenciales conocidas y SMB abierto 
 crackmapexec smb [IP] -u '' -p '' --user --> enumerar usuarios 
 crackmapexec smb [IP] -u [user] -p [passwords] -- probar usarios y contraseñas
+crackmapexec smb ledger.thm -u guest -p '' --shares --> enumerar carpetas compartidas
+crackmapexec smb ledger.thm -u guest -p '' --rid --> enumerar usuarios por rid
 smbshares.sh
 
 
