@@ -519,6 +519,14 @@ Linux
      gcc program.c –o executable.exe
 
 
+COMPILAR PROGRAMAS PYTHON A EXE
+................................
+Descargar python
+pip install pyinstaller
+cd C:\Users\<USER>\AppData\Roaming\Python\Python314\Scripts
+pyinstaller --onefile script.py
+
+
 FIND WINDOWS UNQUOTED SERVICE PATHS
 ....................................
 
