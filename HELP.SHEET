@@ -193,6 +193,79 @@ Decode --> echo aG9sYXNveXBlcGU= | base64 -d; echo
 NMAP
 ....
 
+    -v / -vv → Aumenta la verbosidad (muestra más información en tiempo real).
+    -d / -d2… → Modo debug (salida muy detallada para depuración).
+    -oN <fichero> → Guarda los resultados en texto normal.
+    -oX <fichero> → Guarda los resultados en XML.
+    -oG <fichero> → Guarda resultados en formato “grepable”.
+    -oA <base> → Guarda en N, X y G a la vez (base.nmap, .xml, .gnmap).
+    --reason → Muestra la razón por la que un puerto está en cierto estado.
+    --open → Muestra solo los puertos abiertos.
+    -6 → Fuerza escaneo en IPv6.
+    -sn → Solo descubre hosts (ping scan), sin escanear puertos.
+    -Pn → Desactiva el “host discovery”: asume que todos los hosts están activos.
+    -PS[puertos] → Ping TCP SYN a puertos específicos (por defecto 80).
+    -PA[puertos] → Ping TCP ACK a puertos específicos.
+    -PE → Ping ICMP Echo (tipo ping clásico).
+    -PP → Ping ICMP Timestamp.
+    -PM → Ping ICMP Address Mask.
+    -PR → ARP scan (en redes LAN; rápido y fiable).
+    -R → Resolver siempre DNS inverso de las IPs encontradas.
+    -n → No resolver DNS (más rápido).
+    -sS → SYN scan (half-open, rápido y sigiloso). Por defecto como root.
+    -sT → TCP connect scan (usa connect(), menos sigiloso, sin privilegios).
+    -sU → UDP scan.
+    -sA → ACK scan (detección de cortafuegos y filtrado).
+    -sW → Window scan (similares usos al ACK con análisis de ventana TCP).
+    -sM → Maimon scan (variación para evadir algunos filtros).
+    -sN → Null scan (sin flags TCP).
+    -sF → FIN scan (solo flag FIN).
+    -sX → Xmas scan (flags FIN, PSH, URG).
+    -sY → SCTP INIT scan.
+    -sZ → SCTP COOKIE-ECHO scan.
+    -p <lista> → Especifica puertos (ej. -p 80, -p 1-1024, -p 80,443,8080).
+    -p- → Escanea todos los puertos (1–65535).
+    -F → Escaneo rápido (solo puertos más comunes).
+    --top-ports <n> → Escanea los n puertos más usados.
+    -r → No aleatoriza el orden de los puertos (escanea secuencialmente).
+    -sV → Detección de versión del servicio (software y versión en cada puerto).
+    --version-intensity <0-9> → Ajusta intensidad de detección de versión (más = más pruebas).
+    -O → Detección de sistema operativo (OS fingerprinting).
+    --osscan-limit → Solo intenta detección de SO en hosts que lo permitan.
+    --osscan-guess / --fuzzy → Sea más agresivo a la hora de “adivinar” el SO.
+    -A → Escaneo agresivo: combina -O, -sV, traceroute y algunos scripts NSE por defecto.
+    -T0 / -T1 / -T2 / -T3 / -T4 / -T5 → Perfiles de tiempo (0 = muy lento/paranoico, 5 = muy rápido/agresivo).
+    --max-rate <n> → Máximo número de paquetes por segundo.
+    --min-rate <n> → Mínimo número de paquetes por segundo.
+    --scan-delay <ms> → Retraso entre probes a un mismo host/puerto.
+    --max-retries <n> → Número máximo de reintentos por puerto.
+    -f → Fragmenta paquetes (evasión básica).
+    --mtu <n> → Tamaño de fragmentación personalizado.
+    -D <ipas>… → Decoy scan (añade IPs señuelo al escaneo).
+    -S <ip> → Spoof de IP origen.
+    -e <iface> → Especifica interfaz de red.
+    -g <puerto> / --source-port <puerto> → Usa ese puerto origen.
+    --data-length <n> → Añade datos aleatorios al paquete (evasión/simple ruido).
+    -sC → Ejecuta scripts por defecto (equivalente a --script=default).
+    --script <categoria> → Ejecuta scripts de una categoría o patrón
+          Ej.: --script=vuln, --script=auth, --script=http-*.
+    --script-args <k=v,...> → Pasa argumentos a los scripts.
+          Ej.: --script-args user=admin,pass=1234.
+    --script-trace → Muestra el tráfico generado por los scripts.
+    --script-updatedb → Actualiza la base de datos de scripts.
+    --traceroute → Realiza traceroute hacia los hosts objetivo junto con el escaneo.
+    --ttl <n> → Ajusta TTL de los paquetes.
+    --badsum → Envía paquetes con checksum incorrecto (técnica de evasión/sondeo)
+    -iL <fichero> → Carga lista de objetivos desde un archivo.
+    -iR <n> → Escanea n IPs aleatorias (0 = ilimitadas).
+    --exclude <hosts> → Excluye ciertos hosts/ rangos.
+    --excludefile <fichero> → Excluye hosts listados en fichero.
+    -sL → List scan: solo lista objetivos, sin escanear puertos.
+    --packet-trace → Muestra cada paquete enviado/recibido (muy detallado).
+    --iflist → Lista interfaces y rutas de red que ve Nmap.
+    --resume <fichero> → Reanuda un escaneo pausado guardado en un fichero.
+    --stylesheet <f> → Usa otra hoja de estilo para salida XML.
+
 sudo nmap -vv -sC -sV -p- <RHOST>
 nmap -sA [IP] --> Ver si el equipo objetivo está tras un firewall/IDS
 sudo nmap -sV -sU <RHOST> -- escaneo UDP
@@ -209,8 +282,6 @@ nmap -vv -D 10.10.171.166 --> Enviar paquetes falsos desde multiples IP. Para la
             nmap -vv -D $decoys 10.10.171.166
 
 cat archivo-salida-nmap | sed 's/\// /g' | awk '{print $1}' | tr "\n" ","  --> sacar únicamente el número de puerto separados por comas.
-
-https://nmap.org/man/es/index.html
 
 
 WEB SHELL
@@ -771,7 +842,6 @@ ENUMERACION WEB
 DNS
    dig axfr [dominio]
    nslookup
-whatweb [URL]
 curl --> https://www.keycdn.com/support/popular-curl-examples, https://osint.com.ar/domina-curl-con-esta-guia-esencial-de-comandos/
 curl -IL https://www.inlanefreight.com --> banner grabbing web
       curl ascii.live/rick
@@ -780,6 +850,7 @@ curl -IL https://www.inlanefreight.com --> banner grabbing web
       curl ascii.live/batman
 sslscan [dominio]
 openssl s_client -connect [dominio]:443 --> ver certificados SSL
+whatweb -vv [web]
 
 
 AUTORECON TOOL
