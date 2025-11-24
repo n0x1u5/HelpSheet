@@ -751,10 +751,32 @@ EXT-ENUM
   impacket-secretsdump -just-dc-ntlm dominio.local/user@IP -- mostrar hash de contraseñas de usuarios
 
 INT-ENUM
+  Get-ADUser: Recupera información sobre un usuario específico o sobre todos los usuarios.
+    Ejemplo: Get-ADUser -Identity jdoe
+  Get-ADComputer: Obtiene información sobre una máquina específica o sobre todas las máquinas en el dominio.
+    Ejemplo: Get-ADComputer -Identity PC01
+  Get-ADGroup: Recupera detalles de un grupo en Active Directory.
+    Ejemplo: Get-ADGroup -Identity "Administrators"
+  New-ADUser: Crea un nuevo usuario en Active Directory.
+    Ejemplo: New-ADUser -Name "John Doe"
+  Set-ADUser: Modifica propiedades de un usuario existente.
+    Ejemplo: Set-ADUser -Identity jdoe -Description "Account de prueba"
+  Remove-ADUser: Elimina un usuario de Active Directory.
+    Ejemplo: Remove-ADUser -Identity jdoe
+  Get-ADDomain: Recupera información sobre el dominio.
+    Ejemplo: Get-ADDomain
+  Get-ADForest: Recupera información sobre el bosque de Active Directory.
+    Ejemplo: Get-ADForest
+  Get-ADObject: Recupera un objeto de Active Directory basado en un conjunto de criterios.
+    Ejemplo: Get-ADObject -Filter 'ObjectClass -eq "user"'
+  Get-ADDomainController: Encuentra controladores de dominio en el dominio especificado.
+    Ejemplo: Get-ADDomainController -Discover
+
   adPEAS.ps1
   
 https://www.hackplayers.com/2022/03/top10-de-ataques-al-directorio-activo.html
 https://books.spartan-cybersec.com/cpad
+
 
 XSS
 ....
@@ -774,7 +796,6 @@ XSS
 " onload="alert('XSS')
 <img src='bla' onerror=alert("XSS")>
 javascript:alert(document.cookie) --> DOM XSS in jQuery anchor href attribute sink using location.search source
-
 
       Mario Bros XSS
          <iframe src="https://jcw87.github.io/c2-smb1/" width="100%" height="600"></iframe>
