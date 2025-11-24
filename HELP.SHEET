@@ -739,7 +739,7 @@ https://github.com/fullhunt/log4j-scan
 ACTIVE DIRECTORY
 ................
 
-ENUM
+EXT-ENUM
   crackmapexec smb [rango_IP] --> realizar peticiones smb para descubrir equipos del dominio
   crackmapexec smb [rango_IP] -u '' -p '' --shares --> intentar enumerar carpetas compartidas en los equipos con un user anonimo
   crackmapexec smb [rango_IP] -u 'user' -p 'password' --shares --> enumerar carpetas compartidas en los equipos con un user autenticado
@@ -749,8 +749,12 @@ ENUM
   bloodhound-python -u user -p password -d dominio.local -c All --> sacar información del dominio para verla con bloodhound
   ldapsearch -LLL -x -H ldap://dominio.local -b "" -s base "(objectclass=*)" --> descubrir el DC por medio de ldap
   impacket-secretsdump -just-dc-ntlm dominio.local/user@IP -- mostrar hash de contraseñas de usuarios
-https://www.hackplayers.com/2022/03/top10-de-ataques-al-directorio-activo.html
 
+INT-ENUM
+  adPEAS.ps1
+  
+https://www.hackplayers.com/2022/03/top10-de-ataques-al-directorio-activo.html
+https://books.spartan-cybersec.com/cpad
 
 XSS
 ....
