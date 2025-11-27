@@ -203,7 +203,7 @@ NMAP
     --open → Muestra solo los puertos abiertos.
     -6 → Fuerza escaneo en IPv6.
     -sn → Solo descubre hosts (ping scan), sin escanear puertos.
-    -Pn → Desactiva el “host discovery”: asume que todos los hosts están activos.
+    -Pn → Desactiva el “host discovery”: asume que todos los hosts están activos (Ping Null, no realiza ping).
     -PS[puertos] → Ping TCP SYN a puertos específicos (por defecto 80).
     -PA[puertos] → Ping TCP ACK a puertos específicos.
     -PE → Ping ICMP Echo (tipo ping clásico).
