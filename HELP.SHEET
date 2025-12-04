@@ -539,9 +539,9 @@ connect
 RPC, NetBios
 .............
 
-rpcinfo -p $TARGET
-nbtscan $TARGET
-rpcclient -U "" $TARGET
+rpcinfo -p IP
+nbtscan IP
+rpcclient -U "" IP
 
 
 SMTP
@@ -749,6 +749,8 @@ EXT-ENUM
   bloodhound-python -u user -p password -d dominio.local -c All --> sacar información del dominio para verla con bloodhound
   ldapsearch -LLL -x -H ldap://dominio.local -b "" -s base "(objectclass=*)" --> descubrir el DC por medio de ldap
   impacket-secretsdump -just-dc-ntlm dominio.local/user@IP -- mostrar hash de contraseñas de usuarios
+  enum4linux-ng -A IP
+  kerbrute https://github.com/ropnop/kerbrute/releases
 
 INT-ENUM
   Get-ADUser: Recupera información sobre un usuario específico o sobre todos los usuarios.
