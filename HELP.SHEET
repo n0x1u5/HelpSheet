@@ -845,6 +845,11 @@ ENUM PRIVESC
           hostname
           whoami
           whoami /priv
+                SeImpersonatePrivilege: As mentioned already, this privilege allows a process to impersonate the security context of another user after authentication. The “potato” attack revolves around abusing this privilege.
+                SeAssignPrimaryTokenPrivilege: This privilege permits a process to assign the primary token of another user to a new process. It is used in conjunction with the SeImpersonatePrivilege privilege.
+                SeBackupPrivilege: This privilege lets users read any file on the system, ignoring file permissions. Consequently, attackers can use it to dump sensitive files like the SAM or SYSTEM hive.
+                SeRestorePrivilege: This privilege grants the ability to write to any file or registry key without adhering to the set file permissions. Hence, it can be abused to overwrite critical system files or registry settings.
+                SeDebugPrivilege: This privilege allows the account to attach a debugger to any process. As a result, the attacker can use this privilege to dump memory from LSASS and extract credentials or even inject malicious code into privileged processes
           syteminfo
           ipconfig
           cmdkey /list
@@ -852,6 +857,7 @@ ENUM PRIVESC
           schtasks /query
           schtasks /query /fo LIST /v
           dir
+          set
           sc
           set
           netstat
