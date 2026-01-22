@@ -751,6 +751,7 @@ EXT-ENUM
   crackmapexec smb [IP_DC] --pass-pol --> enumerar politica contraseñas del dominio
   bloodhound-python -u user -p password -d dominio.local -c All --> sacar información del dominio para verla con bloodhound
   ldapsearch -LLL -x -H ldap://dominio.local -b "" -s base "(objectclass=*)" --> descubrir el DC por medio de ldap
+  ldapsearch -x -H ldap://IP -b "dc=thm,dc=local" --> enumerar usuarios y sus propiedades
   impacket-secretsdump -just-dc-ntlm dominio.local/user@IP -- mostrar hash de contraseñas de usuarios
   enum4linux-ng -A IP
   kerbrute https://github.com/ropnop/kerbrute/releases
