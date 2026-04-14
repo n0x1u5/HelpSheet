@@ -580,7 +580,7 @@ LINUX/WINDOWS TRICKS
 
 lsof -i:80 --> ver que servicio/proceso está ocupando el puerto 80
 pwdx [pid] --> ver en que ruta tiene origen ese proceso/servicio
-
+history -c && history -w ---> borrar historial terminal
 shred -zun 5 -v --> borrar rastro, logs... en linux
 
      https://hackingpassion.com/clear-your-tracks-on-linux/
