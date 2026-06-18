@@ -53,8 +53,7 @@ LINUX
    ------ option 1 -------
    script /dev/null -c bash
    ctrl+z
-   stty raw -echo
-   fg
+   stty raw -echo; fg
    reset
    xterm
    export TERM=xterm
