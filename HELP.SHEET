@@ -486,7 +486,7 @@ impacket-secretsdump -ntds ntds.dit -system SYSTEM LOCAL --> Extraer hashes del 
 SMB
 ....
 
-enum4linux -a <IP address>
+enum4linux-ng -a <IP address>
 smbclient -L IP -N
 
     Para conectarse:
