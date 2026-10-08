@@ -925,6 +925,7 @@ curl -IL https://www.inlanefreight.com --> banner grabbing web
 sslscan [dominio]
 openssl s_client -connect [dominio]:443 --> ver certificados SSL
 whatweb -vv [web]
+eyewitness -f archivo-con-webs -d --> da una imagen de cada web en un solo vistazo
 
 
 AUTORECON TOOL
